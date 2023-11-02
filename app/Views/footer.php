@@ -2,7 +2,7 @@
 <html>
 <body>
 	<footer id="contacto" class="footer">
-	    <div class="container-fluid p-1 bg-body-secondary">
+	    <div class="container-fluid p-1 color-pri">
 	        <form method="post" style="margin:5%">
 	        	<div class="row">
 	        		<h5 >Contáctanos</h5>
@@ -28,7 +28,7 @@
 		        </div>
 		        <div class="row">
 		        	<div class="d-flex justify-content-end" style="margin-top:2%"> 
-			        	<button type="submit" class="btn btn-secondary">Enviar mensaje</button>
+			        	<button type="submit" class="btn btn-outline-primary">Enviar mensaje</button>
 			        </div>
 		        </div>       
 	        </form>

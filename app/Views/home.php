@@ -20,7 +20,7 @@
 		            <p>Somos una organización sin fines de lucro, que busca ayudar a los jóvenes de 14 a 29 años en su desarrollo personal, a través de oportunidades y servicios sin ningún tipo de costo.</p>
 		        </div>
 		        <div class="d-flex justify-content-end">
-		            <a href="" class="btn btn-primary"> Quiénes somos</a>
+		            <a href="<?=base_url('/nosotros');?>" class="btn btn-primary"> Quiénes somos</a>
 		        </div>
 		    </div>
 		    <div class="col-md-1"></div>
@@ -41,7 +41,7 @@
 		            <p>En la oficina se aprecia el generar encuentros entre los jóvenes, orientados al desarrollo personal y colectivo. Del mismo modo, tenemos en nuestra disposición diferentes servicios que permitan reducir los factores de riesgo que involucren al sector juvenil.</p>
 		        </div>
 		        <div class="d-flex justify-content-end">
-		            <a href="" class="btn btn-primary"> Servicios OMJ</a>
+		            <a href="<?=base_url('/servicios');?>" class="btn btn-primary"> Servicios OMJ</a>
 		        </div>
 		    </div>
 		</div>
