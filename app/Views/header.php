@@ -27,7 +27,7 @@
               <a class="nav-link" href="#contacto">Contacto</a>
             </li>
             <li class="nav-item">
-                <a href="" class="btn btn-outline-primary">Iniciar sesión</a>
+                <a href="<?=base_url('/login') ?>" class="btn btn-outline-primary">Iniciar sesión</a>
             </li>
           </ul>
         </div>

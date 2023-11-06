@@ -59,7 +59,7 @@
 		<div class="row justify-content-center" style="margin:5%">
 		    <div class="col-md-4">
 		        <div class="row">
-		            <h5>Acticidades educacionales</h5>
+		            <h5>Actividades educacionales</h5>
 		        </div>
 		        <div class="row">
 		            <p>Desarrollamos actividades recreativas y desarrollo personal para los alumnos de las instituciones de la comuna, sin embargo, este es exclusivo para alumnos del establecimiento escogido.</p>
