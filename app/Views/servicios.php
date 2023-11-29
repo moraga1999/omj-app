@@ -4,7 +4,7 @@
 	<?= $header ?>
 </head>
 <body>
-	<div class="container-fluid px-4 py-4 bg-main">
+	<div class="container-fluid px-4 py-4">
 		<div class="row justify-content-center">
 			<div class="col-md-8">
 				<h4 style="margin-top:5%">Nuestros servicios</h4>

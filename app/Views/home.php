@@ -4,7 +4,7 @@
 	<?= $header ?>
 </head>
 <body>
-	<div class="container-fluid px-4 py-4 bg-main">
+	<div class="container-fluid px-4 py-4">
 		<div class="row d-flex justify-content-center " style="margin:5%">
 			<div class="col-md-5" style="margin-bottom: 5%;">
 				<img src="<?php echo base_url('/images/logoHome.png'); ?>" alt="logo" class="img-fluid">
