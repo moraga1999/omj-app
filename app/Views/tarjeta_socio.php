@@ -9,7 +9,7 @@
             <div class="col-sm-10 col-md-8">
                 <div class="card" style="margin: 2% auto">
                     <div class="card-header">
-                        <h5>Inscripción Tarjeta Joven - OMJ Curicó</h5>
+                        <h5>Inscripción Socio Tarjeta Joven - OMJ Curicó</h5>
                     </div>
                     <div class="card-body">
                         <form method="post" action="<?=base_url('/nueva-tarjeta') ?>" autocomplete="off">
@@ -19,16 +19,12 @@
                                 <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej: Juanito Castañas" required>
                             </div>
                             <div class="form-group mb-2">
-                                <label for="rut">RUT</label>
-                                <input type="text" class="form-control" id="rut" name="rut" placeholder="Ej: 22303404-9" required>
+                                <label for="empresa">Empresa</label>
+                                <input type="text" class="form-control" id="empresa" name="empresa" placeholder="Ej: Completos Juanito" required>
                             </div>
                             <div class="form-group mb-2">
                                 <label for="direccion">Dirección</label>
                                 <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ej: Villa Altos los Pinos #447" required>
-                            </div>
-                            <div class="form-group mb-2">
-                                <label for="nacimiento">Fecha de Nacimiento</label>
-                                <input type="text" class="form-control" id="nacimiento" name="nacimiento">
                             </div>
                             <div class="form-group mb-2">
                                 <label for="telefono">Número de teléfono</label>
@@ -48,32 +44,5 @@
             </div>
         </div>
     </div>
-    <script>
-        $.datepicker.regional['es'] = {
-             closeText: 'Cerrar',
-             prevText: '< Ant',
-             nextText: 'Sig >',
-             currentText: 'Hoy',
-             monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-             monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
-             dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-             dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-             dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
-             weekHeader: 'Sm',
-             dateFormat: 'yy-mm-dd',
-             firstDay: 1,
-             isRTL: false,
-             showMonthAfterYear: false,
-             yearSuffix: ''
-             };
-        $.datepicker.setDefaults($.datepicker.regional['es']);
-        $(function () {
-            $("#nacimiento").datepicker({
-                "autoclose": true,
-                "changeYear": true,
-                "yearRange": "1990:2024"
-            });
-        });  
-    </script>
 </body>
 </html>

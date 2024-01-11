@@ -8,9 +8,8 @@ class Auth extends BaseController
     public function index(): string
     {
         $header = view('header');
-        $footer = view('footer');
         helper('form');
-        return view('login', ['header' => $header, 'footer' => $footer]);
+        return view('login', ['header' => $header]);
     }
 
     public function auth(): RedirectResponse
@@ -38,10 +37,12 @@ class Auth extends BaseController
             } else {
                 // Credenciales inválidas
                 $data['error'] = 'Credenciales inválidas. Por favor, inténtelo de nuevo.';
+                return redirect()->to(base_url('/login'));
             }
         } else {
             // Validación fallida
             $data['validation'] = $this->validator;
+            return redirect()->to(base_url('/login'));
         }
     }
     

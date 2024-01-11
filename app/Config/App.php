@@ -16,7 +16,7 @@ class App extends BaseConfig
      *
      *    http://example.com/
      */
-    public string $baseURL = 'http://192.168.0.121/omj-app/public';
+    public string $baseURL = 'http://192.168.20.153/omj-app/public';
 
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.

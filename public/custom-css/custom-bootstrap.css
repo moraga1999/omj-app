@@ -1,14 +1,15 @@
+/*
 .btn-primary {
     background-color: #738FF5;
     border-color: #738FF5;
-    color: white; /* Cambia el color del texto a blanco */
-    transition: background-color 0.3s; /* Agrega una transición suave para el color de fondo */
+    color: white; 
+    transition: background-color 0.3s; 
 }
 
 .btn-primary:hover {
-    background-color: #8073F5; /* Cambia el color al hacer hover */
-    border-color: #8073F5; /* Cambia el color del borde al hacer hover */
-    color: white; /* Puedes mantener el color del texto en blanco al hacer hover */
+    background-color: #8073F5; 
+    border-color: #8073F5; 
+    color: white; 
 }
 
 .btn-outline-primary {
@@ -17,11 +18,20 @@
 }
 
 .btn-outline-primary:hover {
-    background-color: #8073F5; /* Cambia el color de fondo al hacer hover */
-    border-color: #8073F5; /* Cambia el color del borde al hacer hover */
-    color: white; /* Cambia el color del texto a blanco al hacer hover */
+    background-color: #8073F5; 
+    border-color: #8073F5;
+    color: white;
 }
 
 .color-pri {
     background-color:#73B8F5;
+}
+*/
+
+.nav-link {
+  color: antiquewhite;
+}
+
+.nav-link:hover {
+  color: white;
 }

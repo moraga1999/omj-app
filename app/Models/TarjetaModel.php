@@ -14,15 +14,11 @@ class TarjetaModel extends Model
         'telefono', 'correo', 'documento', 'tarjeta'
     ];
 
-    public function getRegistros($estado, $busqueda)
+    public function getRegistros($estado)
     {
         $query = $this->builder();
         if ($estado != 4) {
             $query->where('estado', $estado);
-        }
-        if ($busqueda != null) {
-            $query->like('rut', $busqueda);
-            $query->orLike('nombre', $busqueda);
         }
         return $query->get()->getResult();
     }
@@ -39,15 +35,5 @@ class TarjetaModel extends Model
             'correo' => $correo
         ];
         return $this->insert($data);
-    }
-
-    public function guardarDocumento($id, $archivo)
-    {
-        $query = $this->builder();
-        $query->where('id', $id);
-        $data = [
-            'compromiso' => $archivo
-        ];
-        return $query->update($data);
     }
 }

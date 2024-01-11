@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 use App\Models\TarjetaModel;
+use App\Models\ArchivoModel;
+use App\Models\SocioModel;
 use CodeIgniter\HTTP\RedirectResponse;
 
 class TarjetaJoven extends BaseController
@@ -11,23 +13,40 @@ class TarjetaJoven extends BaseController
         helper('form');
         $session = session();
         $usuarioData = $session->get('usuario');
+        $header = view('header');
         if ($usuarioData) {
             $estado = $this->request->getGetPost('filtro_estado');
             if ($estado == null) {
-                $estado = 4;
+                $estado = 1;
             }
-            $busqueda = $this->request->getGetPost('busqueda');
             $model = new TarjetaModel();
-            $registros = $model->getRegistros($estado, $busqueda);
-            $header = view('header');
+            $registros = $model->getRegistros($estado);
+            $model = new ArchivoModel();
+            foreach($registros as $registro){
+                $archivos = $model->getTipoArchivos($registro->id);
+                foreach($archivos as $archivo){
+                    if($archivo->tipo == 'compromiso'){
+                        $registro->compromiso = $archivo->id;
+                    }else if($archivo->tipo == 'tarjeta'){
+                        $registro->tarjeta = $archivo->id;
+                    }
+                }
+            }
             return view('tarjeta_joven', [
                 'header' => $header, 
                 'registros' => $registros, 
-                'estado' => $estado,
-                'busqueda' => $busqueda
+                'estado' => $estado
             ]);
+        } else{
+            return view('login', ['header' => $header]);
         }
     }
+
+    public function tarjeta_info()
+    {
+        $header = view('header');
+        return view('tarjeta_info', ['header' => $header]);
+    }    
 
     public function formulario_tarjeta(): string 
     {
@@ -54,15 +73,43 @@ class TarjetaJoven extends BaseController
         helper('form');
         $id = $this->request->getPost('id');
         $estado = $this->request->getPost('filtro_estado');
-        $busqueda = $this->request->getPost('busqueda');
         $archivo = $this->request->getFile('archivo');
         if ($archivo->isValid()) {
             $ruta_temporal = $archivo->getTempName();
             $contenido = file_get_contents($ruta_temporal);
+            $formato = $archivo->getClientExtension();
             $archivoBase64 = base64_encode($contenido);
-            $model = new TarjetaModel();
-            $model->guardarDocumento($id, $archivoBase64);
+            $model = new ArchivoModel();
+            $model->guardarArchivo($id, $archivoBase64 , $formato, 'compromiso');
         }   
-        return redirect()->to(base_url('/panel?filtro_estado='.$estado.'&busqueda='.$busqueda));
-    }    
+        return redirect()->to(base_url('/panel?filtro_estado='.$estado));
+    }
+
+    public function guardar_qr(): RedirectResponse
+    {
+        helper('form');
+        $id = $this->request->getPost('id');
+        $estado = $this->request->getPost('filtro_estado');
+        $archivo = $this->request->getFile('archivo');
+        if ($archivo->isValid()) {
+            $ruta_temporal = $archivo->getTempName();
+            $contenido = file_get_contents($ruta_temporal);
+            $formato = $archivo->getClientExtension();
+            $archivoBase64 = base64_encode($contenido);
+            $model = new ArchivoModel();
+            $model->guardarArchivo($id, $archivoBase64 , $formato, 'tarjeta');
+        }   
+        return redirect()->to(base_url('/panel?filtro_estado='.$estado));
+    }
+
+    public function obtener_archivo($id)
+    {
+        $model = new ArchivoModel();
+        $resultado = $model->getArchivo($id);
+        $datos['formato'] = $resultado['formato'];
+        $datos['archivo'] = $resultado['archivo'];
+        header('Content-Type: application/json');
+        echo json_encode($datos);
+    }
+
 }
