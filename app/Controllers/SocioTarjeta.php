@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\SocioModel;
+use App\Models\BeneficioModel;
 use CodeIgniter\HTTP\RedirectResponse;
 
 class SocioTarjeta extends BaseController
@@ -27,6 +28,25 @@ class SocioTarjeta extends BaseController
     {
         $header = view('header');
         return view('tarjeta_socio', ['header' => $header]);
+    }
+
+    public function guardar_socio(): RedirectResponse
+    {
+        helper('form');
+        $nombre = $this->request->getPost('nombre');
+        $empresa = $this->request->getPost('empresa');
+        $direccion = $this->request->getPost('direccion');
+        $telefono = $this->request->getPost('telefono');
+        $correo = $this->request->getPost('correo');
+
+        $categoria = $this->request->getPost('categoria');
+        $beneficio = $this->request->getPost('beneficio');
+
+        $model = new SocioModel();
+        $nuevoSocioId = $model->crearSocio($nombre, $empresa, $direccion, $telefono, $correo);
+        $model = new BeneficioModel();
+        $model->crearBeneficio($categoria, $beneficio, $nuevoSocioId);
+        return redirect()->to(base_url('/socios'));
     }
 
 }

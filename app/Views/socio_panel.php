@@ -5,6 +5,7 @@
 </head>
 <body>
     <div class="container pt-2">
+    	<div class="row lead">Solicitantes</div>
 	    <div class="table-responsive">
 	        <table class="table table-bordered">
 	            <thead class="">
@@ -23,7 +24,9 @@
 		                	<td><?= $registro->nombre; ?></td>
 		                	<td><?= $registro->empresa; ?></td>
 		                	<td><?= $registro->direccion; ?></td>
-		                	<td><button> jeje</button></td>
+		                	<td>
+		                		<button class="btn btn-outline-primary">Evaluar</button>
+		                	</td>
 	                	</tr>
 	               	<?php endforeach; ?>
 	            </tbody>
