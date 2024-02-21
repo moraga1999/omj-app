@@ -25,6 +25,8 @@ $routes->post('/tarjeta-qr', 'TarjetaJoven::guardar_qr');
 //Rutas socios tarjeta joven
 $routes->get('/socios', 'SocioTarjeta::index');
 $routes->get('/nuevo-socio', 'SocioTarjeta::formulario_socio');
+$routes->get('/obtener-beneficio/(:segment)', 'SocioTarjeta::obtener_propuesta/$1');
 $routes->post('/nuevo-socio', 'SocioTarjeta::guardar_socio');
+$routes->post('/aprobar-socio', 'SocioTarjeta::evaluar_socio');
 
 

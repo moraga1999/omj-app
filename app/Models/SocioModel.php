@@ -9,7 +9,7 @@ class SocioModel extends Model
     protected $table = 'socios';
     protected $primaryKey = 'id';
     protected $returnType = 'array';    
-    protected $allowedFields = ['nombre', 'empresa', 'correo', 'direccion', 'telefono'];
+    protected $allowedFields = ['nombre', 'empresa', 'correo', 'direccion', 'telefono', 'activo'];
 
     public function getSocios()
     {
@@ -28,5 +28,15 @@ class SocioModel extends Model
             'correo' => $correo
         ];
         return $this->insert($data);
+    }
+
+    public function aprobarSocio($id)
+    {
+        $query = $this->builder();
+        $data = [
+            'activo' => 1
+        ];
+        $query->where('id', $id);
+        $query->update($data);
     }
 }

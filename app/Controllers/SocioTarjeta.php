@@ -49,4 +49,26 @@ class SocioTarjeta extends BaseController
         return redirect()->to(base_url('/socios'));
     }
 
+    public function evaluar_socio(): RedirectResponse
+    {
+        //de momento solo habilita al socio
+        helper('form');
+        $id = $this->request->getPost('id');
+        $model = new SocioModel();
+        $model->aprobarSocio($id);
+        return redirect()->to(base_url('/socios'));
+    }
+
+    public function obtener_propuesta($idSocio)
+    {
+        $model = new BeneficioModel();
+        $datos = $model->obtenerBeneficio($idSocio);
+        $beneficio = [
+            'categoria' => $datos['categoria'],
+            'descripcion' => $datos['descripcion']
+        ];
+        $this->response->setHeader('Content-Type', 'application/json');
+        return $this->response->setJSON($beneficio);
+    }
+
 }

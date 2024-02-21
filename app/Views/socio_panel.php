@@ -24,14 +24,59 @@
 		                	<td><?= $registro->nombre; ?></td>
 		                	<td><?= $registro->empresa; ?></td>
 		                	<td><?= $registro->direccion; ?></td>
+		                	<?php if($registro->activo == 0):?>
 		                	<td>
-		                		<button class="btn btn-outline-primary">Evaluar</button>
+		                		<button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#evaluarModal<?=$registro->id;?>" onclick="cargarDatosEvaluar(<?=$registro->id;?>)">Evaluar</button>
+		                		<!-- Modal -->
+								<div class="modal fade" id="evaluarModal<?=$registro->id;?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								  <div class="modal-dialog">
+								  	<form method="post" action="<?=base_url('/aprobar-socio')?>" autocomplete="off">
+								  		<?= csrf_field() ?>
+									    <div class="modal-content">
+									      <div class="modal-header">
+									        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title <?=$registro->id ;?></h1>
+									        <input type="hidden" name="id" value="<?= $registro->id?>">
+									        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									      </div>
+									      <div class="modal-body">
+									      	<div class="form-group mb-2 col-12">
+			                                    <label for="categoria">Categoría</label>
+			                                    <input type="text" class="form-control" id="evaluarCategoria" name="categoria" value="" readonly>
+			                                </div>
+			                                <div class="form-group mb-2 col-12">
+			                                    <label for="beneficio">Propuesta de beneficio</label>
+			                                    <input type="text" class="form-control" id="evaluarDescripcion" name="beneficio" value="" readonly>
+			                                </div>
+									      </div>
+									      <div class="modal-footer">
+									        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+									        <button type="submit" class="btn btn-success">Aprobar</button>
+									      </div>
+									    </div>
+								    </form>
+								  </div>
+								</div>
 		                	</td>
+		                	<?php endif;?>
 	                	</tr>
 	               	<?php endforeach; ?>
 	            </tbody>
 	        </table>
 	    </div>
 	</div>
+	<script>
+	    function cargarDatosEvaluar(idSocio) {
+	        $.when(
+	            $.get("<?= base_url('obtener-beneficio/') ?>" + idSocio, function (data) {
+	                // Obtener datos
+	                $("#evaluarCategoria").val(data['categoria']);
+	                $("#evaluarDescripcion").val(data['descripcion']);
+	            })
+	        ).done(function () {
+	            // Activar modal después de que la solicitud AJAX se complete
+	            $('#evaluarModal' + idSocio).modal('show');
+	        });
+	    }
+	</script>
 </body>
 </html>

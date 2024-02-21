@@ -20,4 +20,9 @@ class BeneficioModel extends Model
         ];
         return $this->insert($data);
     }
+
+    public function obtenerBeneficio($socio)
+    {
+        return $this->where('socio', $socio)->first();
+    }
 }
