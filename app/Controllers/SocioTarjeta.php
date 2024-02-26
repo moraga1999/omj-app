@@ -46,7 +46,7 @@ class SocioTarjeta extends BaseController
         $nuevoSocioId = $model->crearSocio($nombre, $empresa, $direccion, $telefono, $correo);
         $model = new BeneficioModel();
         $model->crearBeneficio($categoria, $beneficio, $nuevoSocioId);
-        return redirect()->to(base_url('/socios'));
+        return redirect()->to(base_url('/tarjeta-info'));
     }
 
     public function evaluar_socio(): RedirectResponse

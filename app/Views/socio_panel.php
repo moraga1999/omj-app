@@ -34,7 +34,7 @@
 								  		<?= csrf_field() ?>
 									    <div class="modal-content">
 									      <div class="modal-header">
-									        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title <?=$registro->id ;?></h1>
+									        <h1 class="modal-title fs-5" id="exampleModalLabel">Evaluar nuevo socio <?=$registro->id ;?></h1>
 									        <input type="hidden" name="id" value="<?= $registro->id?>">
 									        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 									      </div>
@@ -57,7 +57,11 @@
 								  </div>
 								</div>
 		                	</td>
-		                	<?php endif;?>
+		                	<?php elseif($registro->activo==1):?>
+		                	<td>
+		                		<button>Detalles</button>
+		                	</td>
+		                <?php endif; ?>
 	                	</tr>
 	               	<?php endforeach; ?>
 	            </tbody>

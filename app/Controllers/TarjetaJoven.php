@@ -44,8 +44,13 @@ class TarjetaJoven extends BaseController
 
     public function tarjeta_info()
     {
+        $model = new SocioModel();
+        $listaSocios = $model->getSociosBeneficios();
         $header = view('header');
-        return view('tarjeta_info', ['header' => $header]);
+        return view('tarjeta_info', [
+            'header' => $header,
+            'listaSocios' => $listaSocios
+        ]);
     }    
 
     public function formulario_tarjeta(): string 

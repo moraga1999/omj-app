@@ -18,6 +18,15 @@ class SocioModel extends Model
         return $query->get()->getResult();
     }
 
+    public function getSociosBeneficios()
+    {
+        $query = $this->builder();
+        $query->select('*');
+        $query->join('beneficios', 'socios.id = beneficios.socio');
+        $query->where('activo = 1');
+        return $query->get()->getResult();
+    }
+
     public function crearSocio($nombre, $empresa, $direccion, $telefono, $correo)
     {
         $data = [

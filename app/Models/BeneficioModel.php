@@ -16,7 +16,7 @@ class BeneficioModel extends Model
         $data = [
             'categoria' => $categoria,
             'descripcion' => $descripcion,
-            'socio' => $socio
+            'socio' => $socio,
         ];
         return $this->insert($data);
     }
