@@ -23,6 +23,11 @@ class TarjetaModel extends Model
         return $query->get()->getResult();
     }
 
+    public function getRegistro($id)
+    {
+        return $this->find($id);
+    }
+
     public function crearRegistro($nombre, $rut, $direccion, $nacimiento, $telefono, $correo)
     {
         $data = [

@@ -30,22 +30,19 @@
 	        <table class="table table-bordered">
 	            <thead class="">
 	                <tr>
-	                    <th scope="col">ID</th>
 	                    <th scope="col">Nombre</th>
 	                    <th scope="col">RUT</th>
-	                    <th scope="col">Teléfono</th>
 	                    <th scope="col">Correo</th>
 	                    <th scope="col">Compromiso</th>
 	                    <th scope="col">Tarjeta</th>
+	                    <th scope="col">Acciones</th>
 	                </tr>
 	            </thead>
 	            <tbody>
 	                <?php foreach($registros as $registro): ?>
 	                	<tr>
-	                		<td><?= $registro->id; ?></td>
 		                	<td><?= $registro->nombre; ?></td>
 		                	<td><?= $registro->rut; ?></td>
-		                	<td><?= $registro->telefono; ?></td>
 		                	<td><?= $registro->correo; ?></td>
 
 		                	<td>
@@ -118,6 +115,7 @@
 		                			-
 		                		<?php endif; ?>
 		                	</td>
+		                	<td><a href="<?= base_url('/tarjeta/'.$registro->id)?>" class="btn btn-outline-primary">Detalles</a></td>
 	                	</tr>
 	               	<?php endforeach; ?>
 	            </tbody>

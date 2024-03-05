@@ -117,4 +117,25 @@ class TarjetaJoven extends BaseController
         echo json_encode($datos);
     }
 
+    public function detalles_tarjeta($id)
+    {
+        $session = session();
+        $usuarioData = $session->get('usuario');
+        $header = view('header');
+        if ($usuarioData) {
+            $model = new TarjetaModel();
+            $registro = $model->getRegistro($id);
+            $model = new ArchivoModel();
+            $archivos = $model->getArchivosTarjeta($id);
+            $header = view('header');
+            return view('tarjeta_detalles', [
+                'header' => $header,
+                'registro' => $registro,
+                'archivos' => $archivos
+            ]);
+        }else{
+            return view('login', ['header' => $header]);
+        }
+    }
+
 }

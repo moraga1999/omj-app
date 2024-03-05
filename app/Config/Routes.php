@@ -18,6 +18,7 @@ $routes->get('/panel', 'TarjetaJoven::index');
 $routes->get('/nueva-tarjeta', 'TarjetaJoven::formulario_tarjeta');
 $routes->get('/imagen/(:segment)','TarjetaJoven::obtener_archivo/$1');
 $routes->get('/tarjeta-info', 'TarjetaJoven::tarjeta_info');
+$routes->get('/tarjeta/(:segment)','TarjetaJoven::detalles_tarjeta/$1');
 $routes->post('/nueva-tarjeta', 'TarjetaJoven::guardar_tarjeta');
 $routes->post('/compromiso', 'TarjetaJoven::guardar_documento');
 $routes->post('/tarjeta-qr', 'TarjetaJoven::guardar_qr');

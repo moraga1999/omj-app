@@ -21,6 +21,14 @@ class ArchivoModel extends Model
         return $query->get()->getResult();
     }
 
+    public function getArchivosTarjeta($tarjeta)
+    {
+        $query = $this->builder();
+        $query->select('*'); 
+        $query->where('tarjeta', $tarjeta);
+        return $query->get()->getResult();
+    }
+
     public function getArchivo($id)
     {
        return $this->find($id);
