@@ -41,4 +41,25 @@ class TarjetaModel extends Model
         ];
         return $this->insert($data);
     }
+
+    public function editarRegistro($id, $nombre, $rut, $direccion, $nacimiento, $telefono, $correo)
+    {
+        $data = [
+            'nombre' => $nombre,
+            'rut' => $rut,
+            'direccion' => $direccion,
+            'nacimiento' => $nacimiento,
+            'telefono' => $telefono,
+            'correo' => $correo
+        ];
+        $this->update($id, $data);
+    }
+
+    public function cambiarEstado($id, $estado)
+    {
+        $data = [
+            'estado' => $estado
+        ];
+        $this->update($id, $data);
+    }
 }

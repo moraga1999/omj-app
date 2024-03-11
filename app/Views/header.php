@@ -19,6 +19,18 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+    <style type="text/css">
+      .thumbnail {
+          width: 200px; /* Cambia este valor según el tamaño deseado */
+          height: auto; /* Esto mantendrá la proporción de la imagen */
+          overflow: hidden;
+      }
+      .thumbnail img {
+          width: 100%;
+          height: auto;
+      }
+    </style>
+  
     <nav class="navbar navbar-expand-lg bg-primary">
       <div class="container-fluid">
         <a class="navbar-brand" href="<?= base_url('/'); ?>">

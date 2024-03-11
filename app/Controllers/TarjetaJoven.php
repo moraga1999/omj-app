@@ -138,4 +138,54 @@ class TarjetaJoven extends BaseController
         }
     }
 
+    public function editar_tarjeta($id)
+    {
+        $session = session();
+        $usuarioData = $session->get('usuario');
+        $header = view('header');
+        if ($usuarioData) {
+            $model = new TarjetaModel();
+            $registro = $model->getRegistro($id);
+            $model = new ArchivoModel();
+            $archivos = $model->getArchivosTarjeta($id);
+            $header = view('header');
+            return view('tarjeta_editar', [
+                'header' => $header,
+                'registro' => $registro,
+                'archivos' => $archivos
+            ]);
+        }else{
+            return view('login', ['header' => $header]);
+        }
+    }
+
+    public function guardar_cambios()
+    {
+        helper('form');
+        $id = $this->request->getPost('id');
+        $nombre = $this->request->getPost('nombre');
+        $rut = $this->request->getPost('rut');
+        $direccion = $this->request->getPost('direccion');
+        $nacimiento = $this->request->getPost('nacimiento');
+        $telefono = $this->request->getPost('telefono');
+        $correo = $this->request->getPost('correo');
+        $model = new TarjetaModel();
+        $model->editarRegistro($id, $nombre, $rut, $direccion, $nacimiento, $telefono, $correo);
+        return redirect()->to(base_url('/tarjeta/'.$id));
+    }
+
+    public function eliminar_archivos()
+    {
+        helper('form');
+        $id = $this->request->getPost('id');
+        $confirmacion = $this->request->getPost('confirmacion');
+        if ($confirmacion == 'ELIMINAR') {
+            $model = new ArchivoModel();
+            $model->eliminarArchivos($id);
+            $model = new TarjetaModel();
+            $model->cambiarEstado($id, 1);
+            return redirect()->to(base_url('/tarjeta/'.$id));
+        }
+    }
+
 }

@@ -19,9 +19,13 @@ $routes->get('/nueva-tarjeta', 'TarjetaJoven::formulario_tarjeta');
 $routes->get('/imagen/(:segment)','TarjetaJoven::obtener_archivo/$1');
 $routes->get('/tarjeta-info', 'TarjetaJoven::tarjeta_info');
 $routes->get('/tarjeta/(:segment)','TarjetaJoven::detalles_tarjeta/$1');
+$routes->get('/editar-tarjeta/(:segment)' , 'TarjetaJoven::editar_tarjeta/$1');
 $routes->post('/nueva-tarjeta', 'TarjetaJoven::guardar_tarjeta');
 $routes->post('/compromiso', 'TarjetaJoven::guardar_documento');
 $routes->post('/tarjeta-qr', 'TarjetaJoven::guardar_qr');
+$routes->post('/cambios-tarjeta', 'TarjetaJoven::guardar_cambios');
+$routes->post('/eliminar-archivos' , 'TarjetaJoven::eliminar_archivos');
+
 
 //Rutas socios tarjeta joven
 $routes->get('/socios', 'SocioTarjeta::index');

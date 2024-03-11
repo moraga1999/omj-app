@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<?= $header ?>
+	<?=$header?>
 </head>
 <body class="">
 	<div class="col-sm-10 col-md-10" style="margin: auto;">
@@ -13,7 +13,7 @@
 			        </div>
 			        <div class="col-md-4 col-12 text-md-right">
 			        	<h5>N°<?= $registro['id'] ?> 
-				        		<a href="" class="btn btn-secondary ml-2">
+				        		<a href="<?= base_url('/editar-tarjeta/'.$registro['id']); ?>" class="btn btn-secondary ml-2">
 				        			Editar
 				        		</a>
 			        	</h5>
@@ -62,7 +62,9 @@
 				</fieldset> 
 				<fieldset class="m-2"> <legend>Archivos asociados</legend>
 					<?php foreach($archivos as $archivo): ?>
+					<div class="thumbnail">
 						<img src="data:image/<?= $archivo->formato?>;base64,<?= $archivo->archivo?>" alt="Imagen base64">
+					</div>
 					<?php endforeach; ?>
 				</fieldset>
 		    

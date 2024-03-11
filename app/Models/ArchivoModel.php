@@ -44,4 +44,11 @@ class ArchivoModel extends Model
         ];
         return $this->insert($data);
     }
+
+    public function eliminarArchivos($tarjeta)
+    {
+        $query = $this->builder();
+        $query->where('tarjeta', $tarjeta);
+        $query->delete();
+    }
 }
