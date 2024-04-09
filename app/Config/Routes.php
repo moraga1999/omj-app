@@ -31,7 +31,11 @@ $routes->post('/eliminar-archivos' , 'TarjetaJoven::eliminar_archivos');
 $routes->get('/socios', 'SocioTarjeta::index');
 $routes->get('/nuevo-socio', 'SocioTarjeta::formulario_socio');
 $routes->get('/obtener-beneficio/(:segment)', 'SocioTarjeta::obtener_propuesta/$1');
+$routes->get('/detalles-socio/(:segment)', 'SocioTarjeta::detalles_socio/$1');
+$routes->get('/editar-socio/(:segment)', 'SocioTarjeta::editar_socio/$1');
 $routes->post('/nuevo-socio', 'SocioTarjeta::guardar_socio');
 $routes->post('/aprobar-socio', 'SocioTarjeta::evaluar_socio');
+$routes->post('/cambios-socio', 'SocioTarjeta::guardar_cambios');
+$routes->post('eliminar-beneficio', 'SocioTarjeta::eliminar_beneficio');
 
 

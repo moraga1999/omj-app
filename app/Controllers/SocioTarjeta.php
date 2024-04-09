@@ -71,4 +71,67 @@ class SocioTarjeta extends BaseController
         return $this->response->setJSON($beneficio);
     }
 
+    public function detalles_socio($id)
+    {
+        $session = session();
+        $usuarioData = $session->get('usuario');
+        $header = view('header');
+        if ($usuarioData) {
+            $model = new SocioModel();
+            $socio = $model->getSocio($id);
+            $model = new BeneficioModel();
+            $beneficio = $model->obtenerBeneficio($id);
+            $header = view('header');
+            return view('socio_detalles', [
+                'header' => $header,
+                'registro' => $socio,
+                'beneficio' => $beneficio
+            ]);
+        }else{
+            return view('login', ['header' => $header]);
+        }
+    }
+
+    public function editar_socio($id)
+    {
+        $model = new SocioModel();
+        $socio = $model->getSocio($id);
+        $model = new BeneficioModel();
+        $beneficio = $model->obtenerBeneficio($id);
+        $header = view('header');
+        return view('socio_editar', [
+            'header' => $header,
+            'socio' => $socio,
+            'beneficio' => $beneficio
+        ]);
+    }
+
+    public function guardar_cambios()
+    {
+        helper('form');
+        $id = $this->request->getPost('id');
+        $nombre = $this->request->getPost('nombre');
+        $empresa = $this->request->getPost('empresa');
+        $direccion = $this->request->getPost('direccion');
+        $telefono = $this->request->getPost('telefono');
+        $correo = $this->request->getPost('correo');
+        $model = new SocioModel();
+        $model->editarSocio($id, $nombre, $empresa, $correo, $direccion, $telefono);
+        return redirect()->to(base_url('/detalles-socio/'.$id));
+    }
+
+    public function eliminar_beneficio()
+    {
+        helper('form');
+        $id = $this->request->getPost('id');
+        $confirmacion = $this->request->getPost('confirmacion');
+        if ($confirmacion == 'ELIMINAR') {
+            $model = new BeneficioModel();
+            $model->eliminarBeneficio($id);
+            $model = new SocioModel();
+            $model->cambiarActivo($id, 0);
+            return redirect()->to(base_url('/socio/'.$id));
+        }
+    }
+
 }

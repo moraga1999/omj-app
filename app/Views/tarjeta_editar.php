@@ -64,7 +64,7 @@
                                       </div>
                                       <div class="modal-body text-start">
                                             <?= csrf_field() ?>
-                                            <label for="confirmacion">Si desea eliminar este ticket, escriba "ELIMINAR" en el campo de texto (ADVERTENCIA: Si elimina los archivos asociados, el beneficiario pasará al estado de "Nuevo").</label>
+                                            <label for="confirmacion">Si desea eliminar los archivos, escriba "ELIMINAR" en el campo de texto (ADVERTENCIA: Si elimina los archivos asociados, el beneficiario pasará al estado de "Nuevo").</label>
                                             <input type="text" class="form-control mt-2" name="confirmacion" required>
                                             <input type="hidden" name="id" value="<?=$registro['id'] ?>">
                                       </div>

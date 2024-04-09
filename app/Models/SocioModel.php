@@ -48,4 +48,29 @@ class SocioModel extends Model
         $query->where('id', $id);
         $query->update($data);
     }
+
+    public function getSocio($id)
+    {
+        return $this->find($id);
+    }
+
+    public function editarSocio($id, $nombre, $empresa, $correo, $direccion, $telefono)
+    {
+        $data = [
+            'nombre' => $nombre,
+            'empresa' => $empresa,
+            'correo' => $correo,
+            'direccion' => $direccion,
+            'telefono' => $telefono
+        ];
+        $this->update($id, $data);
+    }
+
+    public function cambiarActivo($id, $estado)
+    {
+        $data = [
+            'activo' => $estado
+        ];
+        $this->update($id, $data);
+    }
 }

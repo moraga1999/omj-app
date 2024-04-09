@@ -59,7 +59,7 @@
 		                	</td>
 		                	<?php elseif($registro->activo==1):?>
 		                	<td>
-		                		<button>Detalles</button>
+		                		<a class="btn btn-primary" href="<?=base_url('/detalles-socio/'.$registro->id) ?>">Detalles</a>
 		                	</td>
 		                <?php endif; ?>
 	                	</tr>

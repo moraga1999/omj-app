@@ -25,4 +25,11 @@ class BeneficioModel extends Model
     {
         return $this->where('socio', $socio)->first();
     }
+
+    public function eliminarBeneficio($socio)
+    {
+        $query = $this->builder();
+        $query->where('socio', $socio);
+        $query->delete();
+    }
 }
