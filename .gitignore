@@ -16,3 +16,32 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 /vendor/
+
+# CodeIgniter specific
+public/assets/*
+writable/logs/*
+writable/uploads/*
+
+# Composer specific
+composer.lock
+
+# IDE files
+.vscode/
+.idea/
+
+# Miscellaneous
+.DS_Store
+Thumbs.db
+
+# Ignorar todos los archivos en el directorio writable
+writable/*
+
+# Permitir la inclusión de index.html y .htaccess para protección adicional
+!writable/index.html
+!writable/.htaccess
+
+# Excluir subdirectorios específicos que deben ser versionados
+!writable/cache/index.html
+!writable/cache/.htaccess
+!writable/logs/index.html
+!writable/logs/.htaccess

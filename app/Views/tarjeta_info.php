@@ -8,7 +8,7 @@
         <div class="container-fluid pt-3 pb-3">
             <div class="row justify-content-center">
                 <div class="col-lg-6">
-                    <img src="<?= base_url('/images/tarjeta-ejemplo.jpg'); ?>" class="img-fluid">
+                    <img src="<?= base_url('assets/images/tarjeta-ejemplo.jpg'); ?>" class="img-fluid">
                 </div>
                 <div class="col-lg-5 pt-2" style="padding: 3rem;">
                     <h2>Tarjeta joven</h2>

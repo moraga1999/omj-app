@@ -6,7 +6,7 @@
 <body>
 	<div class="row d-flex justify-content-center " style="margin:5%">
 		<div class="col-md-5" style="">
-			<img src="<?php echo base_url('/images/logoHome.png'); ?>" alt="logo" class="img-fluid">
+			<img src="<?php echo base_url('assets/images/logoHome.png'); ?>" alt="logo" class="img-fluid">
 			<h5 class="text-center" style="margin-top: 3%; color:dimgray; ">Oportunidades, protección y momentos de encuentro para los jóvenes de la comuna</h5>
 		</div>
 	</div>
@@ -65,7 +65,7 @@
         <div class="container-fluid pt-3 pb-3" id="nosotros">
             <div class="row">
                 <div class="col-lg-6">
-                    <img src="<?= base_url('/images/omjprev.jpeg'); ?>" class="img-fluid">
+                    <img src="<?= base_url('assets/images/omjprev.jpeg'); ?>" class="img-fluid">
                 </div>
                 <div class="col-lg-6" style="padding: 3rem;">
                     <h2>Quiénes somos</h2>
