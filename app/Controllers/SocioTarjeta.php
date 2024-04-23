@@ -55,7 +55,7 @@ class SocioTarjeta extends BaseController
         helper('form');
         $id = $this->request->getPost('id');
         $model = new SocioModel();
-        $model->aprobarSocio($id);
+        $model->cambiarEstadoSocio($id, 1);
         return redirect()->to(base_url('/socios'));
     }
 
@@ -129,7 +129,7 @@ class SocioTarjeta extends BaseController
             $model = new BeneficioModel();
             $model->eliminarBeneficio($id);
             $model = new SocioModel();
-            $model->cambiarActivo($id, 0);
+            $model->cambiarEstadoSocio($id, 0);
             return redirect()->to(base_url('/socio/'.$id));
         }
     }

@@ -24,7 +24,7 @@ writable/uploads/*
 
 # Composer specific
 composer.lock
-
+.phpunit.result.cache
 # IDE files
 .vscode/
 .idea/
@@ -35,6 +35,7 @@ Thumbs.db
 
 # Ignorar todos los archivos en el directorio writable
 writable/*
+build/*
 
 # Permitir la inclusión de index.html y .htaccess para protección adicional
 !writable/index.html

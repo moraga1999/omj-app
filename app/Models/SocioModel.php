@@ -39,16 +39,6 @@ class SocioModel extends Model
         return $this->insert($data);
     }
 
-    public function aprobarSocio($id)
-    {
-        $query = $this->builder();
-        $data = [
-            'activo' => 1
-        ];
-        $query->where('id', $id);
-        $query->update($data);
-    }
-
     public function getSocio($id)
     {
         return $this->find($id);
@@ -66,7 +56,7 @@ class SocioModel extends Model
         $this->update($id, $data);
     }
 
-    public function cambiarActivo($id, $estado)
+    public function cambiarEstadoSocio($id, $estado)
     {
         $data = [
             'activo' => $estado
