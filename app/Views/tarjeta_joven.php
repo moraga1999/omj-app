@@ -3,8 +3,8 @@
 <head>
 	<?= $header ?>
 </head>
-<body>
-    <div class="container pt-2">
+<body class="d-flex flex-column min-vh-100">
+    <div class="container pt-2 flex-grow-1">
 		<form method="get" id="tarjeta" action="<?= base_url('/panel')?>">
 			<div class="row mb-2 justify-content-md-end">
 			    <div class="col-md-2 col-5 text-md-end mb-2">
@@ -173,18 +173,14 @@
         } );
 
         $("#busqueda").on("keyup", function() {
-            // Obtener el valor actual del campo de búsqueda
             var busqueda = $(this).val().toLowerCase();
-            // Ocultar todas las filas de la tabla
 		    $("tbody tr").hide();
 
-		    // Mostrar solo las filas que coinciden con la búsqueda
 		    $("tbody tr").filter(function() {
-		        // Puedes ajustar esta lógica según tus necesidades
-		        // Aquí estoy comparando el contenido de todas las celdas con la búsqueda
 		        return $(this).text().toLowerCase().includes(busqueda);
 		    }).show();
         });
 	</script>
+	<?= $footer ?>
 </body>
 </html>

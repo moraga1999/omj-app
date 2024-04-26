@@ -30,40 +30,39 @@
           height: auto;
       }
     </style>
-  
-    <nav class="navbar navbar-expand-lg bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
       <div class="container-fluid">
         <a class="navbar-brand" href="<?= base_url('/'); ?>">
           <img src="<?= base_url('assets/images/omjlogoblk.png'); ?>" alt="logo" style="width: 50px;">
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <?php if(isset($_SESSION['usuario'])): 
-              $usuario = $_SESSION['usuario'];
-              if($usuario['tipo'] == 1):?>
-                <li class="nav-item ms-auto">
-                  <a class="nav-link" href="<?=base_url('/panel');?>">Tarjeta joven</a>
+              <?php if(isset($_SESSION['usuario'])): 
+                $usuario = $_SESSION['usuario'];
+                if($usuario['tipo'] == 1):?>
+                  <li class="nav-item ms-auto">
+                    <a class="nav-link" href="<?=base_url('/panel');?>">Tarjeta joven</a>
+                  </li>
+                  <li class="nav-item ms-auto">
+                    <a class="nav-link" href="<?=base_url('/socios');?>">Socios</a>
+                  </li>
+                <?php elseif($usuario['tipo'] == 2): ?>
+                  <li class="nav-item ms-auto">
+                    <a class="nav-link" href="<?=base_url('/beneficios');?>">Beneficios</a>
+                  </li>
+                <?php endif; ?>
+                <li class="nav-item ms-auto ps-4">
+                    <a href="<?=base_url('/logout') ?>" class="btn btn-outline-light">Cerrar sesión</a>
                 </li>
-                <li class="nav-item ms-auto">
-                  <a class="nav-link" href="<?=base_url('/socios');?>">Socios</a>
-                </li>
-              <?php elseif($usuario['tipo'] == 2): ?>
-                <li class="nav-item ms-auto">
-                  <a class="nav-link" href="<?=base_url('/beneficios');?>">Beneficios</a>
+              <?php else: ?>
+                <li class="nav-item ms-auto ps-4">
+                    <a href="<?=base_url('/login') ?>" class="btn btn-outline-light">Iniciar sesión</a>
                 </li>
               <?php endif; ?>
-              <li class="nav-item ms-auto ps-4">
-                  <a href="<?=base_url('/logout') ?>" class="btn btn-outline-light">Cerrar sesión</a>
-              </li>
-            <?php else: ?>
-              <li class="nav-item ms-auto ps-4">
-                  <a href="<?=base_url('/login') ?>" class="btn btn-outline-light">Iniciar sesión</a>
-              </li>
-            <?php endif; ?>
-          </ul>
+            </ul>
         </div>
       </div>
     </nav>

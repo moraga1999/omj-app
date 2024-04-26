@@ -6,18 +6,20 @@ use App\Models\BeneficioModel;
 use CodeIgniter\HTTP\RedirectResponse;
 
 class SocioTarjeta extends BaseController
-{
+{    
     public function index(): string
     {
         $session = session();
         $usuarioData = $session->get('usuario');
         $header = view('header');
+        $footer = view('footer');
         if ($usuarioData) {
             $model = new SocioModel();
             $registros = $model->getSocios();
             return view('socio_panel', [
                 'header' => $header, 
-                'registros' => $registros
+                'registros' => $registros,
+                'footer' => $footer
             ]);
         } else{
             return view('login', ['header' => $header]);
@@ -27,7 +29,8 @@ class SocioTarjeta extends BaseController
     public function formulario_socio(): string 
     {
         $header = view('header');
-        return view('tarjeta_socio', ['header' => $header]);
+        $footer = view('footer');
+        return view('tarjeta_socio', ['header' => $header, 'footer' => $footer]);
     }
 
     public function guardar_socio(): RedirectResponse
@@ -76,6 +79,7 @@ class SocioTarjeta extends BaseController
         $session = session();
         $usuarioData = $session->get('usuario');
         $header = view('header');
+        $footer = view('footer');
         if ($usuarioData) {
             $model = new SocioModel();
             $socio = $model->getSocio($id);
@@ -85,7 +89,8 @@ class SocioTarjeta extends BaseController
             return view('socio_detalles', [
                 'header' => $header,
                 'registro' => $socio,
-                'beneficio' => $beneficio
+                'beneficio' => $beneficio,
+                'footer' => $footer
             ]);
         }else{
             return view('login', ['header' => $header]);
@@ -99,10 +104,12 @@ class SocioTarjeta extends BaseController
         $model = new BeneficioModel();
         $beneficio = $model->obtenerBeneficio($id);
         $header = view('header');
+        $footer = view('footer');
         return view('socio_editar', [
             'header' => $header,
             'socio' => $socio,
-            'beneficio' => $beneficio
+            'beneficio' => $beneficio,
+            'footer' => $footer
         ]);
     }
 

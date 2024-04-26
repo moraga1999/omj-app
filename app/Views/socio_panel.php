@@ -3,8 +3,8 @@
 <head>
 	<?= $header ?>
 </head>
-<body>
-    <div class="container pt-2">
+<body class="d-flex flex-column min-vh-100">
+    <div class="container pt-2 flex-grow-1">
     	<div class="row lead">Solicitantes</div>
 	    <div class="table-responsive">
 	        <table class="table table-bordered">
@@ -82,5 +82,6 @@
 	        });
 	    }
 	</script>
+	<?= $footer ?>
 </body>
 </html>

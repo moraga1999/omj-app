@@ -14,6 +14,7 @@ class TarjetaJoven extends BaseController
         $session = session();
         $usuarioData = $session->get('usuario');
         $header = view('header');
+        $footer = view('footer');
         if ($usuarioData) {
             $estado = $this->request->getGetPost('filtro_estado');
             if ($estado == null) {
@@ -35,10 +36,11 @@ class TarjetaJoven extends BaseController
             return view('tarjeta_joven', [
                 'header' => $header, 
                 'registros' => $registros, 
-                'estado' => $estado
+                'estado' => $estado,
+                'footer' => $footer
             ]);
         } else{
-            return view('login', ['header' => $header]);
+            return view('login', ['header' => $header, 'footer' => $footer]);
         }
     }
 
@@ -47,16 +49,19 @@ class TarjetaJoven extends BaseController
         $model = new SocioModel();
         $listaSocios = $model->getSociosBeneficios();
         $header = view('header');
+        $footer = view('footer');
         return view('tarjeta_info', [
             'header' => $header,
-            'listaSocios' => $listaSocios
+            'listaSocios' => $listaSocios,
+            'footer' => $footer
         ]);
     }    
 
     public function formulario_tarjeta(): string 
     {
         $header = view('header');
-        return view('tarjeta_form', ['header' => $header]);
+        $footer = view('footer');
+        return view('tarjeta_form', ['header' => $header, 'footer' => $footer]);
     }
 
     public function guardar_tarjeta(): RedirectResponse
@@ -122,19 +127,20 @@ class TarjetaJoven extends BaseController
         $session = session();
         $usuarioData = $session->get('usuario');
         $header = view('header');
+        $footer = view('footer');
         if ($usuarioData) {
             $model = new TarjetaModel();
             $registro = $model->getRegistro($id);
             $model = new ArchivoModel();
-            $archivos = $model->getArchivosTarjeta($id);
-            $header = view('header');
+            $archivos = $model->getArchivosTarjeta($id);            
             return view('tarjeta_detalles', [
                 'header' => $header,
                 'registro' => $registro,
-                'archivos' => $archivos
+                'archivos' => $archivos,
+                'footer' => $footer
             ]);
         }else{
-            return view('login', ['header' => $header]);
+            return view('login', ['header' => $header, 'footer' => $footer]);
         }
     }
 
@@ -143,19 +149,20 @@ class TarjetaJoven extends BaseController
         $session = session();
         $usuarioData = $session->get('usuario');
         $header = view('header');
+        $footer = view('footer');
         if ($usuarioData) {
             $model = new TarjetaModel();
             $registro = $model->getRegistro($id);
             $model = new ArchivoModel();
-            $archivos = $model->getArchivosTarjeta($id);
-            $header = view('header');
+            $archivos = $model->getArchivosTarjeta($id);            
             return view('tarjeta_editar', [
                 'header' => $header,
                 'registro' => $registro,
-                'archivos' => $archivos
+                'archivos' => $archivos,
+                'footer' => $footer
             ]);
         }else{
-            return view('login', ['header' => $header]);
+            return view('login', ['header' => $header, 'footer' => $footer]);
         }
     }
 

@@ -3,11 +3,16 @@
 <head>
     <?= $header ?>
 </head>
-<body>
-    <div class="bg-main px-4 py-4">
+<body class="d-flex flex-column min-vh-100">
+    <div class="bg-main px-4 py-4 flex-grow-1">
         <div class="col-md-6 col-11" style="margin: 2% auto;">
             <div class="card" style="padding: 5%;">
                 <h4 class="card-title">Iniciar sesión</h4>
+                <?php if(session()->getFlashData('error') || session()->getFlashData('validation')): ?>
+                    <div class="alert alert-danger" role="alert">
+                        Error al iniciar sesión: Datos incorrectos
+                    </div>
+                <?php endif;?>
                 <form method="post" action="<?=base_url('/login') ?>">
                     <?= csrf_field() ?>
                     <div class="mb-3">
@@ -27,5 +32,6 @@
             </div>
         </div>
     </div>
+    <?= $footer ?>
 </body>
 </html>

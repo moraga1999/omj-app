@@ -1,39 +1,15 @@
 <!DOCTYPE html>
 <html>
-<body>
-	<footer id="contacto" class="footer">
-	    <div class="container-fluid p-1 color-pri">
-	        <form method="post" style="margin:5%">
-	        	<div class="row">
-	        		<h5 >Contáctanos</h5>
-	        	</div>
-	        	<div class="row">
-	        		<div class="col-md-6">
-		                <div class="form-group">
-		                	
-		                    <label for="nombre">Tu nombre:</label>
-		                    <input type="text" class="form-control" id="nombre" name="nombre" required>
-		                </div>
-		                <div class="form-group">
-		                    <label for="correo">Tu correo:</label>
-		                    <input type="text" class="form-control" id="correo" name="correo">
-		                </div>
-		            </div>
-		            <div class="col-md-6">
-		                <div class="form-group">
-		                    <label for="mensaje">Tu mensaje:</label>
-		                    <textarea type="text" class="form-control" id="mensaje" name="mensaje"></textarea>
-		                </div>
-		            </div>
-		        </div>
-		        <div class="row">
-		        	<div class="d-flex justify-content-end" style="margin-top:2%"> 
-			        	<button type="submit" class="btn btn-outline-primary">Enviar mensaje</button>
-			        </div>
-		        </div>       
-	        </form>
-	    </div>
-	</footer>
-
-</body>
+<footer class="footer bg-light pb-2 pt-2">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+				<p class="text-muted small mb-4 mb-lg-0">&copy; Oficina Municipal de la Juventud Curicó, 2024.</p>
+			</div>
+			<div class="col-lg-6 h-100 text-center text-lg-end my-auto">
+				<p class="text-muted small mb-4 mb-lg-0"> Escuela de Ingeniería Civil en Computación, Universidad de Talca.</p>
+			</div>
+		</div>
+	</div>	
+</footer>
 </html>

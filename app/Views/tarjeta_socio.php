@@ -3,13 +3,20 @@
 <head>
 	<?= $header ?>
 </head>
-<body>
-	<div class="container">
+<body class="d-flex flex-column min-vh-100">
+	<div class="container flex-grow-1">
         <div class="row justify-content-center ">
             <div class="col-sm-10 col-md-8">
                 <div class="card" style="margin: 2% auto">
-                    <div class="card-header">
-                        <h5>Inscripción Socio Tarjeta Joven - OMJ Curicó</h5>
+                    <div class="card-header bg-light">
+                        <div class="row align-items-center">
+                            <div class="col-auto">
+                                <img src="<?= base_url('assets/images/logo.png'); ?>" alt="logo" style="width: 50px;">
+                            </div>
+                            <div class="col">
+                                <h5 class="mb-0">Inscripción Socio Tarjeta Joven</h5>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <form method="post" action="<?=base_url('/nuevo-socio') ?>" autocomplete="off">
@@ -67,5 +74,6 @@
             </div>
         </div>
     </div>
+    <?= $footer ?>
 </body>
 </html>

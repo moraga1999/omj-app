@@ -3,14 +3,22 @@
 <head>
 	<?= $header ?>
 </head>
-<body>
-	<div class="container">
+<body class="d-flex flex-column min-vh-100">
+	<div class="container flex-grow-1">
         <div class="row justify-content-center ">
             <div class="col-sm-10 col-md-8">
                 <div class="card" style="margin: 2% auto">
-                    <div class="card-header">
-                        <h5>Inscripción Tarjeta Joven - OMJ Curicó</h5>
+                    <div class="card-header bg-light">
+                        <div class="row align-items-center">
+                            <div class="col-auto">
+                                <img src="<?= base_url('assets/images/logo.png'); ?>" alt="logo" style="width: 50px;">
+                            </div>
+                            <div class="col">
+                                <h5 class="mb-0">Inscripción Tarjeta Joven</h5>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="card-body">
                         <form method="post" action="<?=base_url('/nueva-tarjeta') ?>" autocomplete="off">
                             <?= csrf_field() ?>
@@ -28,7 +36,7 @@
                             </div>
                             <div class="form-group mb-2">
                                 <label for="nacimiento">Fecha de Nacimiento</label>
-                                <input type="text" class="form-control" id="nacimiento" name="nacimiento">
+                                <input type="text" class="form-control" id="nacimiento" name="nacimiento" placeholder="Ingresa una fecha" required>
                             </div>
                             <div class="form-group mb-2">
                                 <label for="telefono">Número de teléfono</label>
@@ -75,5 +83,6 @@
             });
         });  
     </script>
+    <?= $footer ?>
 </body>
 </html>

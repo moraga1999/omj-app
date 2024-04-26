@@ -8,7 +8,7 @@ class Home extends BaseController
     {
         $session = session();
         $header = view('header');
-        $footer = view('footer');
-        return view('home', ['header' => $header, 'footer' => $footer]);
+        //Home tiene header especial
+        return view('home', ['header' => $header]);
     }
 }

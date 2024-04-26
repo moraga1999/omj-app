@@ -1,4 +1,4 @@
-# CodeIgniter 4 Application Starter
+# Sistema web gestión de beneficios OMJ Curicó
 
 ## What is CodeIgniter?
 

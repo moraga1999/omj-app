@@ -3,8 +3,8 @@
 <head>
 	<?=$header?>
 </head>
-<body class="">
-	<div class="col-sm-10 col-md-10" style="margin: auto;">
+<body class="d-flex flex-column min-vh-100">
+	<div class="col-sm-10 col-md-10 flex-grow-1" style="margin: auto;">
 		<div class="card mt-2">
 		  	<div class="card-header">
 			    <div class="row">
@@ -71,5 +71,6 @@
 			</div>
 		</div>
 	</div>
+	<?= $footer ?>
 </body>
 </html>

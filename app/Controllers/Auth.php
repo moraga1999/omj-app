@@ -8,25 +8,23 @@ class Auth extends BaseController
     public function index(): string
     {
         $header = view('header');
+        $footer = view('footer');
         helper('form');
-        return view('login', ['header' => $header]);
+        return view('login', ['header' => $header, 'footer' => $footer]);
     }
 
     public function auth(): RedirectResponse
     {
         $model = new AuthModel();
         helper('form');
-        // Validar los datos del formulario
         $rules = [
             'email'    => 'required|valid_email',
             'password' => 'required|min_length[5]'
         ];
         if ($this->validate($rules)) {
-            // Obtener los datos del formulario
             $email    = $this->request->getPost('email');
             $password = $this->request->getPost('password');
 
-            // Intentar autenticar al usuario
             $usuario = $model->auth($email, $password);
 
             if ($usuario) {
@@ -37,12 +35,12 @@ class Auth extends BaseController
             } else {
                 // Credenciales inválidas
                 $data['error'] = 'Credenciales inválidas. Por favor, inténtelo de nuevo.';
-                return redirect()->to(base_url('/login'));
+                return redirect()->to(base_url('/login'))->withInput()->with('error', $data['error']);
             }
         } else {
             // Validación fallida
             $data['validation'] = $this->validator;
-            return redirect()->to(base_url('/login'));
+            return redirect()->to(base_url('/login'))->withInput()->with('validation', $data['validation']);
         }
     }
     

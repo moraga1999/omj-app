@@ -3,8 +3,8 @@
 <head>
 	<?= $header ?>
 </head>
-<body>
-	<div class="container">
+<body class="d-flex flex-column min-vh-100">
+	<div class="container flex-grow-1">
         <div class="row justify-content-center ">
             <div class="col-sm-10 col-md-8">
                 <div class="card" style="margin: 2% auto">
@@ -89,5 +89,6 @@
             </div>
         </div>
     </div>
+    <?= $footer ?>
 </body>
 </html>
