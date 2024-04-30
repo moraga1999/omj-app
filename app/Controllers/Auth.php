@@ -27,12 +27,25 @@ class Auth extends BaseController
 
             $usuario = $model->auth($email, $password);
 
-            if ($usuario) {
+            if ($usuario && $usuario['tipo'] == 1) {
                 $session = session(); // Obtener la instancia de la sesión
                 $session->set('usuario', $usuario);
 
                 return redirect()->to(base_url('/panel'));
-            } else {
+            } elseif($usuario && $usuario['tipo'] == 2){
+                //usuario socio de una tarjeta
+                $session = session(); // Obtener la instancia de la sesión
+                $session->set('usuario', $usuario);
+
+                return redirect()->to(base_url('/mis-beneficios'));
+            } elseif ($usuario && $usuario['tipo'] == 3) {
+                //usuario joven de una tarjeta
+                $session = session(); // Obtener la instancia de la sesión
+                $session->set('usuario', $usuario);
+
+                return redirect()->to(base_url('/mi-tarjeta'));
+            }
+            else {
                 // Credenciales inválidas
                 $data['error'] = 'Credenciales inválidas. Por favor, inténtelo de nuevo.';
                 return redirect()->to(base_url('/login'))->withInput()->with('error', $data['error']);

@@ -8,7 +8,23 @@ class Home extends BaseController
     {
         $session = session();
         $header = view('header');
-        //Home tiene header especial
+        //Home tiene footer unico
         return view('home', ['header' => $header]);
+    }
+
+    public function mi_tarjeta(): string
+    {
+        $session = session();
+        $header = view('header');
+        $footer = view('footer');
+        return view('mi_tarjeta', ['header' => $header, 'footer' => $footer]);
+    }
+
+    public function mis_beneficios(): string
+    {
+        $session = session();
+        $header = view('header');
+        $footer = view('footer');
+        return view('mis_beneficios', ['header' => $header, 'footer' => $footer]);
     }
 }

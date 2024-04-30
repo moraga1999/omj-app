@@ -51,7 +51,11 @@
                   </li>
                 <?php elseif($usuario['tipo'] == 2): ?>
                   <li class="nav-item ms-auto">
-                    <a class="nav-link" href="<?=base_url('/beneficios');?>">Beneficios</a>
+                    <a class="nav-link" href="<?=base_url('/mis-beneficios');?>">Mis Beneficios</a>
+                  </li>
+                  <?php elseif($usuario['tipo'] == 3): ?>
+                  <li class="nav-item ms-auto">
+                    <a class="nav-link" href="<?=base_url('/mi-tarjeta');?>">Mi tarjeta</a>
                   </li>
                 <?php endif; ?>
                 <li class="nav-item ms-auto ps-4">

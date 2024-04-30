@@ -7,6 +7,8 @@ use CodeIgniter\Router\RouteCollection;
  */
 //Rutas sistema web
 $routes->get('/', 'Home::index');
+$routes->get('/mi-tarjeta', 'Home::mi_tarjeta');
+$routes->get('/mis-beneficios', 'Home::mis_beneficios');
 
 //Rutas autenticación
 $routes->get('/login', 'Auth::index');

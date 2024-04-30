@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use App\Models\SocioModel;
 use App\Models\BeneficioModel;
+use App\Models\AuthModel;
 use CodeIgniter\HTTP\RedirectResponse;
 
 class SocioTarjeta extends BaseController
@@ -42,7 +43,7 @@ class SocioTarjeta extends BaseController
         $direccion = $this->request->getPost('direccion');
         $telefono = $this->request->getPost('telefono');
         $correo = $this->request->getPost('correo');
-
+        
         $categoria = $this->request->getPost('categoria');
         $beneficio = $this->request->getPost('beneficio');
 
@@ -50,6 +51,11 @@ class SocioTarjeta extends BaseController
         $nuevoSocioId = $model->crearSocio($nombre, $empresa, $direccion, $telefono, $correo);
         $model = new BeneficioModel();
         $model->crearBeneficio($categoria, $beneficio, $nuevoSocioId);
+
+        $correoFormat = strstr($correo, '@', true);
+        $userModel = new AuthModel();
+        $userModel->crearUsuarioSocio($correo, $correoFormat);
+        
         // Mensaje de éxito que se mostrará en la próxima solicitud
         $session->setFlashdata('mensaje', '¡El socio ha sido registrado! te enviaremos un correo a '.$correo.' con más información.');
         return redirect()->to(base_url('/tarjeta-info'));

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use App\Models\TarjetaModel;
 use App\Models\ArchivoModel;
+use App\Models\AuthModel;
 use App\Models\SocioModel;
 use CodeIgniter\HTTP\RedirectResponse;
 
@@ -69,12 +70,15 @@ class TarjetaJoven extends BaseController
         helper('form');
         $nombre = $this->request->getPost('nombre');
         $rut = $this->request->getPost('rut');
+        $rut = str_replace(['.', '-'], '', $rut);
         $direccion = $this->request->getPost('direccion');
         $nacimiento = $this->request->getPost('nacimiento');
         $telefono = $this->request->getPost('telefono');
         $correo = $this->request->getPost('correo');
         $model = new TarjetaModel();
         $model->crearRegistro($nombre, $rut, $direccion, $nacimiento, $telefono, $correo);
+        $userModel = new AuthModel();
+        $userModel->crearUsuarioJoven($correo, $rut);
         return redirect()->to(base_url('/'));
     }
 

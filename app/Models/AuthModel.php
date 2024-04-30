@@ -18,4 +18,24 @@ class AuthModel extends Model
         return $user;
     }
 
+    public function crearUsuarioSocio($correo, $password)
+    {
+        $data = [
+            'email' => $correo,
+            'password' => $password,
+            'tipo' => 2,
+        ];
+        return $this->insert($data);
+    }
+
+    public function crearUsuarioJoven($correo, $password)
+    {
+        $data = [
+            'email' => $correo,
+            'password' => $password,
+            'tipo' => 3,
+        ];
+        return $this->insert($data);
+    }
+
 }
