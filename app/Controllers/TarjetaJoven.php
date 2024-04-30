@@ -33,7 +33,7 @@ class TarjetaJoven extends BaseController
                     }
                 }
             }
-            return view('tarjeta_joven', [
+            return view('tarjeta_joven2', [
                 'header' => $header, 
                 'registros' => $registros, 
                 'estado' => $estado,

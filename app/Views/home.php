@@ -5,7 +5,7 @@
 </head>
 <body>
 	<div class="row d-flex justify-content-center " style="margin:5%">
-		<div class="col-md-5" style="">
+		<div class="col-md-5">
 			<img src="<?php echo base_url('assets/images/logoHome.png'); ?>" alt="logo" class="img-fluid">
 			<h5 class="text-center" style="margin-top: 3%; color:dimgray; ">Oportunidades, protección y momentos de encuentro para los jóvenes de la comuna</h5>
 		</div>

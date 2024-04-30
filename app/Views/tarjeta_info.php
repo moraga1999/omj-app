@@ -4,6 +4,11 @@
 	<?= $header ?>
 </head>
 <body class="d-flex flex-column min-vh-100">
+    <?php if (session()->has('mensaje')): ?>
+        <div class="alert alert-success m-5" role="alert">
+            <?= session('mensaje') ?>
+        </div>
+    <?php endif; ?>
     <section class="flex-grow-1">
         <div class="container-fluid pt-3 pb-3">
             <div class="row justify-content-center">

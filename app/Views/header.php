@@ -47,7 +47,7 @@
                     <a class="nav-link" href="<?=base_url('/panel');?>">Tarjeta joven</a>
                   </li>
                   <li class="nav-item ms-auto">
-                    <a class="nav-link" href="<?=base_url('/socios');?>">Socios</a>
+                    <a class="nav-link" href="<?=base_url('/socios');?>">Colaboradores</a>
                   </li>
                 <?php elseif($usuario['tipo'] == 2): ?>
                   <li class="nav-item ms-auto">
