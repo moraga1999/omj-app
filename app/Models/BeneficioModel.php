@@ -26,6 +26,13 @@ class BeneficioModel extends Model
         return $this->where('socio', $socio)->first();
     }
 
+    public function getBeneficios($socio)
+    {
+        $query = $this->builder();
+        $query->where('socio', $socio);
+        return $query->get()->getResult();
+    }
+
     public function eliminarBeneficio($socio)
     {
         $query = $this->builder();

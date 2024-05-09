@@ -28,6 +28,11 @@ class TarjetaModel extends Model
         return $this->find($id);
     }
 
+    public function getRegistroEmail($email)
+    {
+        return $this->where('correo', $email)->first();
+    }
+
     public function crearRegistro($nombre, $rut, $direccion, $nacimiento, $telefono, $correo)
     {
         $data = [

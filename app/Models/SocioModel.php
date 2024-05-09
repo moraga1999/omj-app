@@ -44,6 +44,11 @@ class SocioModel extends Model
         return $this->find($id);
     }
 
+    public function getRegistroEmail($email)
+    {
+        return $this->where('correo', $email)->first();
+    }
+    
     public function editarSocio($id, $nombre, $empresa, $correo, $direccion, $telefono)
     {
         $data = [

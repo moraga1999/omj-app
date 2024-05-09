@@ -52,7 +52,7 @@ class SocioTarjeta extends BaseController
         $model = new BeneficioModel();
         $model->crearBeneficio($categoria, $beneficio, $nuevoSocioId);
 
-        $correoFormat = strstr($correo, '@', true);
+        $correoFormat = strstr($correo.'', '@', true);
         $userModel = new AuthModel();
         $userModel->crearUsuarioSocio($correo, $correoFormat);
         

@@ -53,6 +53,9 @@
                   <li class="nav-item ms-auto">
                     <a class="nav-link" href="<?=base_url('/mis-beneficios');?>">Mis Beneficios</a>
                   </li>
+                  <li class="nav-item ms-auto">
+                    <a class="nav-link" href="<?=base_url('/validar-qr');?>">Validar Tarjeta</a>
+                  </li>
                   <?php elseif($usuario['tipo'] == 3): ?>
                   <li class="nav-item ms-auto">
                     <a class="nav-link" href="<?=base_url('/mi-tarjeta');?>">Mi tarjeta</a>
