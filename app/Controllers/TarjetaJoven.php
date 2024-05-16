@@ -199,4 +199,17 @@ class TarjetaJoven extends BaseController
         }
     }
 
+    public function validar_tarjeta($id, $fecha)
+    {
+        $session = session();
+        $usuarioData = $session->get('usuario');
+        $model = new TarjetaModel();
+        $fechaHoy = date("Y-m-d");
+        if ($usuarioData && $fechaHoy == $fecha) {
+            $resultado = $model->getRegistro($id);
+            header('Content-Type: application/json');
+            echo json_encode($resultado);
+        }
+    }
+
 }

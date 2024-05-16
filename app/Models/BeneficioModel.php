@@ -33,10 +33,10 @@ class BeneficioModel extends Model
         return $query->get()->getResult();
     }
 
-    public function eliminarBeneficio($socio)
+    public function eliminarBeneficio($id)
     {
         $query = $this->builder();
-        $query->where('socio', $socio);
+        $query->where('id', $id);
         $query->delete();
     }
 }

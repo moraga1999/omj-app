@@ -25,8 +25,8 @@ class Home extends BaseController
         $joven = $model->getRegistroEmail($usuarioData['email']);
         $header = view('header');
         $footer = view('footer');
-
-        $data   = base_url('/tarjeta/'.$joven['id']);
+        $fechaHoy = date("Y-m-d");
+        $data   =  $joven['id'].",".$fechaHoy;
         $qrcode = (new QRCode)->render($data);
         return view('mi_tarjeta', ['header' => $header, 'footer' => $footer, 'qrcode' => $qrcode]);
     }

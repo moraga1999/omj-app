@@ -50,6 +50,9 @@
 	</div>
 
 <script>
+    function cerrarModal() {
+	        $('#imagenModal').modal('hide');
+	    }
     $(document).ready(function() {
         $('#tablaJovenes').DataTable({
             language: {

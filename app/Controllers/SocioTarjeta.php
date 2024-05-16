@@ -141,13 +141,47 @@ class SocioTarjeta extends BaseController
         helper('form');
         $id = $this->request->getPost('id');
         $confirmacion = $this->request->getPost('confirmacion');
+        $nBeneficios = $this->request->getPost('nBeneficios');
         if ($confirmacion == 'ELIMINAR') {
             $model = new BeneficioModel();
             $model->eliminarBeneficio($id);
             $model = new SocioModel();
-            $model->cambiarEstadoSocio($id, 0);
-            return redirect()->to(base_url('/socio/'.$id));
+            if ($nBeneficios == 1) {
+                $model->cambiarEstadoSocio($id, 0);
+            }
+            return redirect()->to(base_url('/mis-beneficios/'));
         }
     }
 
+    public function crear_beneficio()
+    {
+        helper('form');
+        $model = new BeneficioModel();
+        $idSocio = $this->request->getPost('id');
+        $categoria = $this->request->getPost('categoria');
+        $descripcion = $this->request->getPost('descripcion');
+
+        $model->crearBeneficio($categoria, $descripcion, $idSocio);
+        return redirect()->to(base_url('/mis-beneficios/'));
+
+    }
+
+    public function validacion_tarjeta()
+    {
+        $session = session();
+        $usuarioData = $session->get('usuario');
+        
+        $model = new SocioModel();
+        $socio = $model->getRegistroEmail($usuarioData['email']);
+        $model = new BeneficioModel();
+        $beneficios = $model->getBeneficios(strval($socio['id']));
+        $header = view('header');
+        $footer = view('footer');
+        return view('socio_validar', [
+            'header' => $header,
+            'socio' => $socio,
+            'beneficios' => $beneficios,
+            'footer' => $footer
+        ]);
+    }
 }

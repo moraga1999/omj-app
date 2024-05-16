@@ -49,7 +49,7 @@
                                     <div class="modal-body text-start">
                                         <?= csrf_field() ?>
                                         <label for="categoria">Categoría</label>
-                                        <select type="text" class="form-select" id="categoria" id="categoria" name="categoria" required>
+                                        <select type="text" class="form-select" id="categoria" name="categoria" required>
                                             <option value="" selected disabled> Elegir una opción</option>
                                             <option value="Salud">Salud</option>
                                             <option value="Ropa">Ropa</option>
@@ -57,8 +57,9 @@
                                             <option value="Educación">Educación</option>
                                             <option value="Alimentación">Alimentación</option>
                                         </select>
-                                        <label for="confirmacion">Descripción</label>
-                                        <input type="text" class="form-control mt-2" name="confirmacion" required>
+                                        <label for="descripcion">Descripción</label>
+                                        <input type="text" class="form-control mt-2" name="descripcion" required>
+                                        <input type="hidden" name="id" value="<?= $socio['id'] ?>" required>
                                     </div>
                                     <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -95,6 +96,7 @@
                                     <label for="confirmacion">Si desea eliminar el beneficio, escriba "ELIMINAR" en el campo de texto (ADVERTENCIA: Si elimina todos los beneficios, el colaborador cambiará su estado a "INACTIVO").</label>
                                     <input type="text" class="form-control mt-2" name="confirmacion" required>
                                     <input type="hidden" name="id" value="<?=$beneficio->id?>">
+                                    <input type="hidden" name="nBeneficios" value="<?=count($beneficios);?>">
                                 </div>
                                 <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -112,6 +114,5 @@
     
     <?= $footer;?>
 </body>
-<script> //console.log(<?= json_encode($beneficios)?>)</script>
 </html>
 
