@@ -39,7 +39,7 @@
                             <input type="hidden" name="emailSocio" id="emailSocio" value="<?= $socio["nombre"] ?>">
                             <div class="form-group mb-2">
                                 <label for="Nombre">Nombre</label>
-                                <input type="text" class="form-control" name="nombre" id="nombreJoven" value="" readonly>
+                                <input type="text" class="form-control" name="nombreJoven" id="nombreJoven" value="" readonly>
                             </div>
                             <div class="form-group mb-2">
                                 <label for="beneficio">Beneficio utilizado</label>

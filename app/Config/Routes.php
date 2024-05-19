@@ -42,4 +42,5 @@ $routes->post('/aprobar-socio', 'SocioTarjeta::evaluar_socio');
 $routes->post('/cambios-socio', 'SocioTarjeta::guardar_cambios');
 $routes->post('/eliminar-beneficio', 'SocioTarjeta::eliminar_beneficio');
 $routes->post('/crear-beneficio', 'SocioTarjeta::crear_beneficio');
+$routes->post('/crear-validacion', 'SocioTarjeta::crear_validacion');
 

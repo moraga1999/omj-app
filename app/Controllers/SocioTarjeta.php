@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Models\SocioModel;
 use App\Models\BeneficioModel;
 use App\Models\AuthModel;
+use App\Models\ValidacionModel;
 use CodeIgniter\HTTP\RedirectResponse;
 
 class SocioTarjeta extends BaseController
@@ -149,7 +150,7 @@ class SocioTarjeta extends BaseController
             if ($nBeneficios == 1) {
                 $model->cambiarEstadoSocio($id, 0);
             }
-            return redirect()->to(base_url('/mis-beneficios/'));
+            return redirect()->to(base_url('/mis-beneficios'));
         }
     }
 
@@ -162,7 +163,7 @@ class SocioTarjeta extends BaseController
         $descripcion = $this->request->getPost('descripcion');
 
         $model->crearBeneficio($categoria, $descripcion, $idSocio);
-        return redirect()->to(base_url('/mis-beneficios/'));
+        return redirect()->to(base_url('/mis-beneficios'));
 
     }
 
@@ -183,5 +184,20 @@ class SocioTarjeta extends BaseController
             'beneficios' => $beneficios,
             'footer' => $footer
         ]);
+    }
+
+    public function crear_validacion()
+    {
+        helper('form');
+        $model = new ValidacionModel();
+        $idJoven = $this->request->getPost('idJoven');
+        $idSocio = $this->request->getPost('idSocio');
+        $emailSocio = $this->request->getPost('emailSocio');
+        $nombreJoven = $this->request->getPost('nombreJoven');
+        $beneficio = $this->request->getPost('beneficio');
+        $monto = $this->request->getPost('monto');
+
+        $model->crearValidacion($idJoven, $idSocio, $nombreJoven, $emailSocio, $beneficio, $monto);
+        return redirect()->to(base_url('/validar-qr'));
     }
 }
