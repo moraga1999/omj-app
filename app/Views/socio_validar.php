@@ -36,7 +36,7 @@
                             <?= csrf_field() ?>
                             <input type="hidden" name="idJoven" id="idJoven" value="">
                             <input type="hidden" name="idSocio" id="idSocio" value="<?= $socio["id"] ?>">
-                            <input type="hidden" name="emailSocio" id="emailSocio" value="<?= $socio["nombre"] ?>">
+                            <input type="hidden" name="emailSocio" id="emailSocio" value="<?= $socio["correo"] ?>">
                             <div class="form-group mb-2">
                                 <label for="Nombre">Nombre</label>
                                 <input type="text" class="form-control" name="nombreJoven" id="nombreJoven" value="" readonly>

@@ -37,6 +37,8 @@ $routes->get('/obtener-beneficio/(:segment)', 'SocioTarjeta::obtener_propuesta/$
 $routes->get('/detalles-socio/(:segment)', 'SocioTarjeta::detalles_socio/$1');
 $routes->get('/editar-socio/(:segment)', 'SocioTarjeta::editar_socio/$1');
 $routes->get('/validar-qr', 'SocioTarjeta::validacion_tarjeta');
+$routes->get('/mis-validaciones', 'SocioTarjeta::mis_validaciones');
+$routes->get('/validaciones', 'SocioTarjeta::panel_validaciones');
 $routes->post('/nuevo-socio', 'SocioTarjeta::guardar_socio');
 $routes->post('/aprobar-socio', 'SocioTarjeta::evaluar_socio');
 $routes->post('/cambios-socio', 'SocioTarjeta::guardar_cambios');

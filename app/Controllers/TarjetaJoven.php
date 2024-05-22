@@ -212,4 +212,9 @@ class TarjetaJoven extends BaseController
         }
     }
 
+    public function beneficios_vitrina()
+    {
+        
+    }
+
 }

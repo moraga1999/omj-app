@@ -200,4 +200,34 @@ class SocioTarjeta extends BaseController
         $model->crearValidacion($idJoven, $idSocio, $nombreJoven, $emailSocio, $beneficio, $monto);
         return redirect()->to(base_url('/validar-qr'));
     }
+
+    public function panel_validaciones()
+    {
+        $session = session();
+        $model = new ValidacionModel();
+        $validaciones = $model->getValidaciones();
+        $header = view('header');
+        $footer = view('footer');
+        return view('validaciones_panel', [
+            'header' => $header,
+            'validaciones' => json_encode($validaciones),
+            'footer' => $footer
+        ]);
+    }
+
+    public function mis_validaciones()
+    {
+        $session = session();
+        $usuarioData = $session->get('usuario');
+        
+        $model = new ValidacionModel();
+        $validaciones = $model->getValidacionesSocio($usuarioData['email']);
+        $header = view('header');
+        $footer = view('footer');
+        return view('validaciones_panel', [
+            'header' => $header,
+            'validaciones' => json_encode($validaciones),
+            'footer' => $footer
+        ]);
+    }
 }
