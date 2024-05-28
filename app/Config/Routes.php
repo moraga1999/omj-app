@@ -18,17 +18,13 @@ $routes->get('/logout', 'Auth::logout');
 //Rutas tarjeta joven
 $routes->get('/panel', 'TarjetaJoven::index');
 $routes->get('/nueva-tarjeta', 'TarjetaJoven::formulario_tarjeta');
-$routes->get('/imagen/(:segment)','TarjetaJoven::obtener_archivo/$1');
 $routes->get('/validar/(:segment)/(:segment)','TarjetaJoven::validar_tarjeta/$1/$2');
 $routes->get('/tarjeta-info', 'TarjetaJoven::tarjeta_info');
 $routes->get('/tarjeta/(:segment)','TarjetaJoven::detalles_tarjeta/$1');
 $routes->get('/editar-tarjeta/(:segment)' , 'TarjetaJoven::editar_tarjeta/$1');
 $routes->post('/nueva-tarjeta', 'TarjetaJoven::guardar_tarjeta');
-$routes->post('/compromiso', 'TarjetaJoven::guardar_documento');
 $routes->post('/tarjeta-qr', 'TarjetaJoven::guardar_qr');
 $routes->post('/cambios-tarjeta', 'TarjetaJoven::guardar_cambios');
-$routes->post('/eliminar-archivos' , 'TarjetaJoven::eliminar_archivos');
-
 
 //Rutas socios tarjeta joven
 $routes->get('/socios', 'SocioTarjeta::index');
@@ -46,3 +42,7 @@ $routes->post('/eliminar-beneficio', 'SocioTarjeta::eliminar_beneficio');
 $routes->post('/crear-beneficio', 'SocioTarjeta::crear_beneficio');
 $routes->post('/crear-validacion', 'SocioTarjeta::crear_validacion');
 
+//Rutas Archivos
+$routes->get('/imagen/(:segment)','ArchivoController::obtener_archivo/$1');
+$routes->post('/guardar-archivo', 'ArchivoController::guardar_documento');
+$routes->post('/eliminar-archivos' , 'ArchivoController::eliminar_archivos');

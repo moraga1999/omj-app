@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use App\Models\SocioModel;
 use App\Models\BeneficioModel;
+use App\Models\ArchivoModel;
 use App\Models\AuthModel;
 use App\Models\ValidacionModel;
 use CodeIgniter\HTTP\RedirectResponse;
@@ -11,6 +12,7 @@ class SocioTarjeta extends BaseController
 {
     public function index(): string
     {
+        helper('form');
         $session = session();
         $usuarioData = $session->get('usuario');
         $header = view('header');
@@ -18,6 +20,11 @@ class SocioTarjeta extends BaseController
         if ($usuarioData) {
             $model = new SocioModel();
             $registros = $model->getSocios();
+            $model = new ArchivoModel();
+            foreach($registros as $registro){
+                $convenio = $model->getIdArchivo($registro->id, 'convenio');
+                $registro->convenio = $convenio;
+            }
             return view('socio_panel2', [
                 'header' => $header, 
                 'registros' => $registros,

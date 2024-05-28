@@ -46,37 +46,6 @@
                               <button type="submit" class="btn btn-primary">Guardar cambios</button>
                             </div>
                         </form>
-                        <legend>Archivos asociados</legend>
-                        <?php foreach($archivos as $archivo): ?>
-                        <div class="thumbnail">
-                            <img src="data:image/<?= $archivo->formato?>;base64,<?= $archivo->archivo?>" alt="Imagen base64">
-                        </div>
-                        <?php endforeach; ?>
-                        <div class="text-end">
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalArchivos<?=$registro['id'] ?>">Eliminar Archivos</button>
-                            <form method="post" action="<?=base_url('/eliminar-archivos') ?>" autocomplete="off">
-                                <div class="modal fade" id="modalArchivos<?=$registro['id'] ?>" tabindex="-1" aria-labelledby="modalArchivosLabel<?=$registro['id'] ?>" aria-hidden="true">
-                                  <div class="modal-dialog">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h5 class="modal-title" id="modalArchivosLabel<?$registro['id'] ?>">Eliminar archivos tarjeta <?=$registro['id']?></h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                      </div>
-                                      <div class="modal-body text-start">
-                                            <?= csrf_field() ?>
-                                            <label for="confirmacion">Si desea eliminar los archivos, escriba "ELIMINAR" en el campo de texto (ADVERTENCIA: Si elimina los archivos asociados, el beneficiario pasará al estado de "Nuevo").</label>
-                                            <input type="text" class="form-control mt-2" name="confirmacion" required>
-                                            <input type="hidden" name="id" value="<?=$registro['id'] ?>">
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-danger">Eliminar Archivos</button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                            </form>
-                        </div>
                     </div>
                 </div>
             </div>

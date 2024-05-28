@@ -13,12 +13,14 @@ class ArchivoModel extends Model
         'formato', 'archivo', 'tarjeta', 'tipo'
     ];
 
-    public function getTipoArchivos($tarjeta)
+    public function getIdArchivo($id, $tipo)
     {
         $query = $this->builder();
-        $query->select('id, tipo'); 
-        $query->where('tarjeta', $tarjeta);
-        return $query->get()->getResult();
+        $query->select('id'); 
+        $query->where('tarjeta', $id);
+        $query->where('tipo', $tipo);
+        $result = $query->get()->getRow();
+        return $result ? (int) $result->id : null;
     }
 
     public function getArchivosTarjeta($tarjeta)
@@ -33,6 +35,14 @@ class ArchivoModel extends Model
     {
        return $this->find($id);
     }
+
+    public function getArchivoOwner($id, $tipo)
+    {
+        $query = $this->builder();
+        $query->where('tarjeta', $id);
+        $query->where('tipo', $tipo);
+        return $query->get()->getRow();
+    }
     
     public function guardarArchivo($tarjeta, $archivo, $formato, $tipo)
     {
@@ -45,10 +55,11 @@ class ArchivoModel extends Model
         return $this->insert($data);
     }
 
-    public function eliminarArchivos($tarjeta)
+    public function eliminarArchivos($tarjeta, $tipo)
     {
         $query = $this->builder();
         $query->where('tarjeta', $tarjeta);
+        $query->where('tipo', $tipo);
         $query->delete();
     }
 }

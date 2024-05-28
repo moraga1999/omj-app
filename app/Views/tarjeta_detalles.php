@@ -60,17 +60,31 @@
 		        </div>
 			    </div>
 				</fieldset> 
-				<fieldset class="m-2"> <legend>Archivos asociados</legend>
-					<?php foreach($archivos as $archivo): ?>
-					<div class="thumbnail">
-						<img src="data:image/<?= $archivo->formato?>;base64,<?= $archivo->archivo?>" alt="Imagen base64">
-					</div>
-					<?php endforeach; ?>
-				</fieldset>
-		    
+				<fieldset class="m-2"> <legend>Carta de Compromiso</legend>
+					<button type="button" class="btn btn-primary ml-2" data-bs-toggle="modal" data-bs-target="#imagenModal">
+						Ver Carta de Compromiso
+					</button>
+					<!-- Modal imagen-->
+					<div class="modal fade" id="imagenModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered modal-lg">
+							<div class="modal-content border-0">
+								<div class="modal-body p-0 d-flex justify-content-center align-items-center position-relative">
+									<button type="button" class="btn-close" data-dismiss="modal" style="position: absolute; top: 10px; right: 10px; z-index: 1" onclick="cerrarModal()">   
+									</button>
+									<img src="data:image/<?= $archivo->formato?>;base64,<?= $archivo->archivo?>" alt="Imagen base64" style="max-width: 100%; max-height: 100vh;">
+								</div>
+							</div>
+						</div>
+					</div>						
+				</fieldset>		
 			</div>
 		</div>
 	</div>
+	<script>
+		function cerrarModal() {
+			$('#imagenModal').modal('hide');
+		}
+	</script>
 	<?= $footer ?>
 </body>
 </html>

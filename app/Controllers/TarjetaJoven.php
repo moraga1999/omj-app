@@ -25,14 +25,8 @@ class TarjetaJoven extends BaseController
             $registros = $model->getRegistros($estado);
             $model = new ArchivoModel();
             foreach($registros as $registro){
-                $archivos = $model->getTipoArchivos($registro->id);
-                foreach($archivos as $archivo){
-                    if($archivo->tipo == 'compromiso'){
-                        $registro->compromiso = $archivo->id;
-                    }else if($archivo->tipo == 'tarjeta'){
-                        $registro->tarjeta = $archivo->id;
-                    }
-                }
+                $compromiso = $model->getIdArchivo($registro->id, 'compromiso');
+                $registro->compromiso = $compromiso;
             }
             return view('tarjeta_joven2', [
                 'header' => $header, 
@@ -82,25 +76,9 @@ class TarjetaJoven extends BaseController
         return redirect()->to(base_url('/'));
     }
 
-    public function guardar_documento(): RedirectResponse
-    {
-        helper('form');
-        $id = $this->request->getPost('id');
-        $estado = $this->request->getPost('filtro_estado');
-        $archivo = $this->request->getFile('archivo');
-        if ($archivo->isValid()) {
-            $ruta_temporal = $archivo->getTempName();
-            $contenido = file_get_contents($ruta_temporal);
-            $formato = $archivo->getClientExtension();
-            $archivoBase64 = base64_encode($contenido);
-            $model = new ArchivoModel();
-            $model->guardarArchivo($id, $archivoBase64 , $formato, 'compromiso');
-        }   
-        return redirect()->to(base_url('/panel?filtro_estado='.$estado));
-    }
-
     public function guardar_qr(): RedirectResponse
     {
+        //codigo muerto, tarjetas se construyen dinamicamente
         helper('form');
         $id = $this->request->getPost('id');
         $estado = $this->request->getPost('filtro_estado');
@@ -116,16 +94,6 @@ class TarjetaJoven extends BaseController
         return redirect()->to(base_url('/panel?filtro_estado='.$estado));
     }
 
-    public function obtener_archivo($id)
-    {
-        $model = new ArchivoModel();
-        $resultado = $model->getArchivo($id);
-        $datos['formato'] = $resultado['formato'];
-        $datos['archivo'] = $resultado['archivo'];
-        header('Content-Type: application/json');
-        echo json_encode($datos);
-    }
-
     public function detalles_tarjeta($id)
     {
         $session = session();
@@ -136,11 +104,11 @@ class TarjetaJoven extends BaseController
             $model = new TarjetaModel();
             $registro = $model->getRegistro($id);
             $model = new ArchivoModel();
-            $archivos = $model->getArchivosTarjeta($id);            
+            $archivo = $model->getArchivoOwner($id, 'compromiso');            
             return view('tarjeta_detalles', [
                 'header' => $header,
                 'registro' => $registro,
-                'archivos' => $archivos,
+                'archivo' => $archivo,
                 'footer' => $footer
             ]);
         }else{
@@ -157,12 +125,9 @@ class TarjetaJoven extends BaseController
         if ($usuarioData) {
             $model = new TarjetaModel();
             $registro = $model->getRegistro($id);
-            $model = new ArchivoModel();
-            $archivos = $model->getArchivosTarjeta($id);            
             return view('tarjeta_editar', [
                 'header' => $header,
                 'registro' => $registro,
-                'archivos' => $archivos,
                 'footer' => $footer
             ]);
         }else{
@@ -183,20 +148,6 @@ class TarjetaJoven extends BaseController
         $model = new TarjetaModel();
         $model->editarRegistro($id, $nombre, $rut, $direccion, $nacimiento, $telefono, $correo);
         return redirect()->to(base_url('/tarjeta/'.$id));
-    }
-
-    public function eliminar_archivos()
-    {
-        helper('form');
-        $id = $this->request->getPost('id');
-        $confirmacion = $this->request->getPost('confirmacion');
-        if ($confirmacion == 'ELIMINAR') {
-            $model = new ArchivoModel();
-            $model->eliminarArchivos($id);
-            $model = new TarjetaModel();
-            $model->cambiarEstado($id, 1);
-            return redirect()->to(base_url('/tarjeta/'.$id));
-        }
     }
 
     public function validar_tarjeta($id, $fecha)

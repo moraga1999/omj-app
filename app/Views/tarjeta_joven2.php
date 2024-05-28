@@ -20,11 +20,11 @@
                     <h1 class="modal-title fs-5" id="pdfModalLabel">Subir carta de compromiso</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <?= form_open_multipart('/compromiso') ?>
+                <?= form_open_multipart('/guardar-archivo') ?>
                 <div class="modal-body">
 		            <?= csrf_field() ?>
-                    <input type="hidden" name="id" id="modalId" value="">
-                    <input type="hidden" name="filtro_estado" value="<?= $estado ?>">
+                    <input type="hidden" name="id" id="modalId">
+                    <input type="hidden" name="tipo" value="convenio">
                     <label for="archivo">Archivo</label>
                     <input type="file" class="form-control-file" name="archivo" accept=".jpg, .jpeg, .png, image/jpeg, image/png" id="archivo" required>
                 </div>
@@ -51,8 +51,8 @@
 
 <script>
     function cerrarModal() {
-	        $('#imagenModal').modal('hide');
-	    }
+	    $('#imagenModal').modal('hide');
+	}
     $(document).ready(function() {
         $('#tablaJovenes').DataTable({
             language: {
