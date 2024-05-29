@@ -2,85 +2,118 @@
 <html>
 <head>
 	<?= $header ?>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" />
+    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
 </head>
 <body class="d-flex flex-column min-vh-100">
     <div class="container pt-2 flex-grow-1">
-    	<div class="row lead">Solicitantes</div>
-	    <div class="table-responsive">
-	        <table class="table table-bordered">
-	            <thead class="">
-	                <tr>
-	                    <th scope="col">ID</th>
-	                    <th scope="col">Nombre</th>
-	                    <th scope="col">Empresa</th>
-	                    <th scope="col">Dirección</th>
-	                    <th scope="col">Acciones</th>
-	                </tr>
-	            </thead>
-	            <tbody>
-	                <?php foreach($registros as $registro): ?>
-	                	<tr>
-	                		<td><?= $registro->id; ?></td>
-		                	<td><?= $registro->nombre; ?></td>
-		                	<td><?= $registro->empresa; ?></td>
-		                	<td><?= $registro->direccion; ?></td>
-		                	<?php if($registro->activo == 0):?>
-		                	<td>
-		                		<button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#evaluarModal<?=$registro->id;?>" onclick="cargarDatosEvaluar(<?=$registro->id;?>)">Evaluar</button>
-		                		<!-- Modal -->
-								<div class="modal fade" id="evaluarModal<?=$registro->id;?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-								  <div class="modal-dialog">
-								  	<form method="post" action="<?=base_url('/aprobar-socio')?>" autocomplete="off">
-								  		<?= csrf_field() ?>
-									    <div class="modal-content">
-									      <div class="modal-header">
-									        <h1 class="modal-title fs-5" id="exampleModalLabel">Evaluar nuevo socio <?=$registro->id ;?></h1>
-									        <input type="hidden" name="id" value="<?= $registro->id?>">
-									        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-									      </div>
-									      <div class="modal-body">
-									      	<div class="form-group mb-2 col-12">
-			                                    <label for="categoria">Categoría</label>
-			                                    <input type="text" class="form-control" id="evaluarCategoria" name="categoria" value="" readonly>
-			                                </div>
-			                                <div class="form-group mb-2 col-12">
-			                                    <label for="beneficio">Propuesta de beneficio</label>
-			                                    <input type="text" class="form-control" id="evaluarDescripcion" name="beneficio" value="" readonly>
-			                                </div>
-									      </div>
-									      <div class="modal-footer">
-									        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-									        <button type="submit" class="btn btn-success">Aprobar</button>
-									      </div>
-									    </div>
-								    </form>
-								  </div>
-								</div>
-		                	</td>
-		                	<?php elseif($registro->activo==1):?>
-		                	<td>
-		                		<a class="btn btn-primary" href="<?=base_url('/detalles-socio/'.$registro->id) ?>">Detalles</a>
-		                	</td>
-		                <?php endif; ?>
-	                	</tr>
-	               	<?php endforeach; ?>
-	            </tbody>
-	        </table>
+        <div class="table-responsive">
+            <table id="tablaColaboradores" class="table table-bordered">
+            </table>
 	    </div>
+        <!-- Modal para subir PDF -->
+        <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="pdfModalLabel">Subir carta de convenio</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <?= form_open_multipart('/guardar-archivo') ?>
+                    <div class="modal-body">
+                        <?= csrf_field() ?>
+                        <input type="hidden" name="id" id="modalId">
+                        <input type="hidden" name="tipo" value="convenio">
+                        <label for="archivo">Archivo</label>
+                        <input type="file" class="form-control-file" name="archivo" accept=".jpg, .jpeg, .png, image/jpeg, image/png" id="archivo" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" id="submitBtn">Confirmar</button>
+                    </div>
+                    <?= form_close() ?>
+                </div>
+            </div>
+        </div>
+        <!-- Modal imagen-->
+        <div class="modal fade" id="imagenModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content border-0">
+                    <div class="modal-body p-0 d-flex justify-content-center align-items-center position-relative">
+                        <button type="button" class="btn-close" data-dismiss="modal" style="position: absolute; top: 10px; right: 10px; z-index: 1" onclick="cerrarModal()">   
+                        </button>
+                        <img id="modalImage" src="" alt="Image" style="max-width: 100%; max-height: 100vh;">
+                    </div>
+                </div>
+            </div>
+        </div>
 	</div>
 	<script>
-	    function cargarDatosEvaluar(idSocio) {
-	        $.when(
-	            $.get("<?= base_url('obtener-beneficio/') ?>" + idSocio, function (data) {
-	                // Obtener datos
-	                $("#evaluarCategoria").val(data['categoria']);
-	                $("#evaluarDescripcion").val(data['descripcion']);
-	            })
-	        ).done(function () {
-	            // Activar modal después de que la solicitud AJAX se complete
-	            $('#evaluarModal' + idSocio).modal('show');
-	        });
-	    }
+        function cerrarModal() {
+            $('#imagenModal').modal('hide');
+        }
+        $(document).ready(function() {
+            $('#tablaColaboradores').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/2.0.5/i18n/es-CL.json',
+                },
+                data: <?= json_encode($registros) ?>,
+                columns: [
+                    { title: 'Nombre', data: 'nombre' },
+                    { title: 'Empresa', data: 'empresa' },
+                    { title: 'Dirección', data: 'direccion' },
+                    { title: 'Convenio', render: function(data, type, row) {
+                        if (row.convenio) {
+                            return '<a href="#" id="imagen" data-target="#imagenModal" data-src="'+ row.convenio +'">' + "convenio" + row.convenio + '</a>';
+                        } else {
+                            return '<button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#pdfModal" data-id="' + row.id + '">Subir PDF</button>';
+                        }
+                    }},
+                    { title: 'Acciones', render: function(data, type, row) {
+                    return '<a href="<?= base_url('/detalles-socio/') ?>' + row.id + '" class="btn btn-outline-primary">Detalles</a>';
+                    }},
+                ]
+            });
+
+            $('#submitBtn').on('click', function() {
+                $('#pdfModal form').submit();
+            });
+
+            // Mostrar modales
+            $('#pdfModal').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget);
+                var id = button.data('id');
+                $('#modalId').val(id);
+            });
+
+            $(document).on("click", '#imagen', function() {
+                var id = $(this).data("src");
+                // Hacer una solicitud GET utilizando la ruta completa
+                $.ajax({
+                    type: "GET",
+                    url: "<?= base_url('/imagen/') ?>" + id,
+                    dataType: "json",  // Indica que esperas una respuesta JSON
+                    success: function(data) {
+                        let formato = data['formato'];
+                        let archivo = data['archivo'];
+
+                        if (formato && archivo) {
+                            let str = "data:" + formato + ";base64," + archivo;
+                            $("#modalImage").attr("src", str);
+                        } else {
+                            console.error("Los datos del formato o archivo son undefined.");
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error en la solicitud:", status, error);
+                    },
+                    complete: function() {
+                        // Activar modal
+                        $('#imagenModal').modal('show');
+                    }
+                });
+            });
+        });
 	</script>
 	<?= $footer ?>
 </body>

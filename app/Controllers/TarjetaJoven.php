@@ -28,7 +28,7 @@ class TarjetaJoven extends BaseController
                 $compromiso = $model->getIdArchivo($registro->id, 'compromiso');
                 $registro->compromiso = $compromiso;
             }
-            return view('tarjeta_joven2', [
+            return view('tarjeta_joven', [
                 'header' => $header, 
                 'registros' => $registros, 
                 'estado' => $estado,

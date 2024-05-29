@@ -39,7 +39,7 @@
                     <a class="nav-link" href="<?=base_url('/socios');?>">Colaboradores</a>
                   </li>
                   <li class="nav-item ms-auto">
-                    <a class="nav-link" href="<?=base_url('/validaciones');?>">Validaciones</a>
+                    <a class="nav-link" href="<?=base_url('/reportes');?>">Reportes</a>
                   </li>
                 <?php elseif($usuario['tipo'] == 2): ?>
                   <li class="nav-item ms-auto">
@@ -49,7 +49,7 @@
                     <a class="nav-link" href="<?=base_url('/validar-qr');?>">Validar Tarjeta</a>
                   </li>
                   <li class="nav-item ms-auto">
-                    <a class="nav-link" href="<?=base_url('/mis-validaciones');?>">Mis Validaciones</a>
+                    <a class="nav-link" href="<?=base_url('/mis-ventas');?>">Mis Ventas</a>
                   </li>
                   <?php elseif($usuario['tipo'] == 3): ?>
                   <li class="nav-item ms-auto">

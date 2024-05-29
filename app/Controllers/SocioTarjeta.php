@@ -25,7 +25,7 @@ class SocioTarjeta extends BaseController
                 $convenio = $model->getIdArchivo($registro->id, 'convenio');
                 $registro->convenio = $convenio;
             }
-            return view('socio_panel2', [
+            return view('socio_panel', [
                 'header' => $header, 
                 'registros' => $registros,
                 'footer' => $footer
@@ -101,12 +101,12 @@ class SocioTarjeta extends BaseController
             $model = new SocioModel();
             $socio = $model->getSocio($id);
             $model = new BeneficioModel();
-            $beneficio = $model->obtenerBeneficio($id);
+        $beneficios = $model->getBeneficios($id);
             $header = view('header');
             return view('socio_detalles', [
                 'header' => $header,
-                'registro' => $socio,
-                'beneficio' => $beneficio,
+                'socio' => $socio,
+                'beneficios' => $beneficios,
                 'footer' => $footer
             ]);
         }else{
@@ -231,10 +231,21 @@ class SocioTarjeta extends BaseController
         $validaciones = $model->getValidacionesSocio($usuarioData['email']);
         $header = view('header');
         $footer = view('footer');
-        return view('validaciones_panel', [
+        return view('mis_ventas', [
             'header' => $header,
             'validaciones' => json_encode($validaciones),
             'footer' => $footer
         ]);
+    }
+
+    public function asignar_categoria()
+    {
+        helper('form');
+        $model = new SocioModel();
+        $idSocio = $this->request->getPost('id');
+        $categoria = $this->request->getPost('categoria');
+
+        $model->asignarCategoria($idSocio, $categoria);
+        return redirect()->to(base_url('/detalles-socio/'.$idSocio));
     }
 }

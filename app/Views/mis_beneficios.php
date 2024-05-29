@@ -32,43 +32,47 @@
             <div class="border bg-light p-3 col-md-8 col-12">
                 <div class="row justify-content-between pb-3">
                     <div class="col">
-                        <legend>Lista de Beneficios</legend>
+                    <div class="row">
+                        <legend class="mb-0">Lista de Beneficios</legend> <!-- mb-2 reduce el margen inferior -->
+                    </div>
+                    <div class="row">
+                        <h3 class="h6 ms-4 mt-0">Categoría: <?= $socio['categoria'] ?></h3> <!-- h5 aplica un tamaño de subtítulo -->
+                    </div>
                     </div>
                     <div class="col-auto">
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createBeneficioModal">
-                            <i class="bi bi-plus"></i> Nuevo
-                        </button>
-                        <form method="post" action="<?=base_url('/crear-beneficio') ?>" autocomplete="off">
-                            <div class="modal fade" id="createBeneficioModal" tabindex="-1" aria-labelledby="createBeneficioLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                    <h5 class="modal-title" id="createBeneficioLabel">Crear beneficio</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <?php if ($socio['categoria'] != "Sin asignar"): ?>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createBeneficioModal">
+                                <i class="bi bi-plus"></i> Nuevo
+                            </button>
+                            <form method="post" action="<?=base_url('/crear-beneficio') ?>" autocomplete="off">
+                                <div class="modal fade" id="createBeneficioModal" tabindex="-1" aria-labelledby="createBeneficioLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="createBeneficioLabel">Crear beneficio</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body text-start">
+                                            <?= csrf_field() ?>
+                                            <label for="categoria">Categoría</label>
+                                            <input type="text" class="form-control mt-2" name="categoria" value="<?= $socio['categoria']?>" readonly>
+                                            <label for="descripcion">Descripción</label>
+                                            <input type="text" class="form-control mt-2" name="descripcion" required>
+                                            <input type="hidden" name="id" value="<?= $socio['id'] ?>" required>
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-success">Crear Beneficio</button>
+                                        </div>
                                     </div>
-                                    <div class="modal-body text-start">
-                                        <?= csrf_field() ?>
-                                        <label for="categoria">Categoría</label>
-                                        <select type="text" class="form-select" id="categoria" name="categoria" required>
-                                            <option value="" selected disabled> Elegir una opción</option>
-                                            <option value="Salud">Salud</option>
-                                            <option value="Ropa">Ropa</option>
-                                            <option value="Entrenimiento">Entrenimiento</option>
-                                            <option value="Educación">Educación</option>
-                                            <option value="Alimentación">Alimentación</option>
-                                        </select>
-                                        <label for="descripcion">Descripción</label>
-                                        <input type="text" class="form-control mt-2" name="descripcion" required>
-                                        <input type="hidden" name="id" value="<?= $socio['id'] ?>" required>
-                                    </div>
-                                    <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-success">Crear Beneficio</button>
                                     </div>
                                 </div>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
+                        <?php else: ?>
+                            <button class="btn btn-primary disabled">
+                                <i class="bi bi-plus"></i> Nuevo
+                            </button>
+                        <?php endif; ?>
                     </div>
                 </div>
                 

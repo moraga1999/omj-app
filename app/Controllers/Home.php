@@ -42,6 +42,11 @@ class Home extends BaseController
 
         $header = view('header');
         $footer = view('footer');
-        return view('mis_beneficios', ['header' => $header, 'footer' => $footer, 'socio' => $socio, 'beneficios' => $beneficios]);
+        return view('mis_beneficios', [
+            'header' => $header,
+            'footer' => $footer,
+            'socio' => $socio,
+            'beneficios' => $beneficios
+        ]);
     }
 }

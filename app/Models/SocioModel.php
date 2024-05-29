@@ -9,7 +9,7 @@ class SocioModel extends Model
     protected $table = 'socios';
     protected $primaryKey = 'id';
     protected $returnType = 'array';    
-    protected $allowedFields = ['nombre', 'empresa', 'correo', 'direccion', 'telefono', 'activo'];
+    protected $allowedFields = ['nombre', 'empresa', 'correo', 'direccion', 'telefono', 'activo', 'categoria'];
 
     public function getSocios()
     {
@@ -67,5 +67,13 @@ class SocioModel extends Model
             'activo' => $estado
         ];
         $this->update($id, $data);
+    }
+
+    public function asignarCategoria($idSocio, $categoria)
+    {
+        $data = [
+            'categoria' => $categoria
+        ];
+        $this->update($idSocio, $data);
     }
 }
