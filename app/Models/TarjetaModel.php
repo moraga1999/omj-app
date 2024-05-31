@@ -14,12 +14,9 @@ class TarjetaModel extends Model
         'telefono', 'correo', 'documento', 'tarjeta'
     ];
 
-    public function getRegistros($estado)
+    public function getRegistros()
     {
         $query = $this->builder();
-        if ($estado != 4) {
-            $query->where('estado', $estado);
-        }
         return $query->get()->getResult();
     }
 
@@ -37,7 +34,7 @@ class TarjetaModel extends Model
     {
         $data = [
             'nombre' => $nombre,
-            'estado' => 1,
+            'estado' => 0,
             'rut' => $rut,
             'direccion' => $direccion,
             'nacimiento' => $nacimiento,

@@ -17,12 +17,8 @@ class TarjetaJoven extends BaseController
         $header = view('header');
         $footer = view('footer');
         if ($usuarioData) {
-            $estado = $this->request->getGetPost('filtro_estado');
-            if ($estado == null) {
-                $estado = 1;
-            }
             $model = new TarjetaModel();
-            $registros = $model->getRegistros($estado);
+            $registros = $model->getRegistros();
             $model = new ArchivoModel();
             foreach($registros as $registro){
                 $compromiso = $model->getIdArchivo($registro->id, 'compromiso');
@@ -30,8 +26,7 @@ class TarjetaJoven extends BaseController
             }
             return view('tarjeta_joven', [
                 'header' => $header, 
-                'registros' => $registros, 
-                'estado' => $estado,
+                'registros' => $registros,
                 'footer' => $footer
             ]);
         } else{
@@ -104,11 +99,9 @@ class TarjetaJoven extends BaseController
             $model = new TarjetaModel();
             $registro = $model->getRegistro($id);
             $model = new ArchivoModel();
-            $archivo = $model->getArchivoOwner($id, 'compromiso');            
             return view('tarjeta_detalles', [
                 'header' => $header,
                 'registro' => $registro,
-                'archivo' => $archivo,
                 'footer' => $footer
             ]);
         }else{
