@@ -165,7 +165,16 @@ class TarjetaJoven extends BaseController
 
     public function beneficios_vitrina()
     {
-        
+        $session = session();
+        $model = new SocioModel();
+        $listaSocios = $model->getSociosBeneficios();
+        $header = view('header');
+        $footer = view('footer');
+        return view('beneficios_vitrina', [
+            'header' => $header,
+            'listaSocios' => json_encode($listaSocios),
+            'footer' => $footer
+        ]);
     }
 
 }

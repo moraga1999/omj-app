@@ -20,6 +20,7 @@ $routes->get('/panel', 'TarjetaJoven::index');
 $routes->get('/nueva-tarjeta', 'TarjetaJoven::formulario_tarjeta');
 $routes->get('/validar/(:segment)/(:segment)','TarjetaJoven::validar_tarjeta/$1/$2');
 $routes->get('/tarjeta-info', 'TarjetaJoven::tarjeta_info');
+$routes->get('/vitrina', 'TarjetaJoven::beneficios_vitrina');
 $routes->get('/tarjeta/(:segment)','TarjetaJoven::detalles_tarjeta/$1');
 $routes->get('/editar-tarjeta/(:segment)' , 'TarjetaJoven::editar_tarjeta/$1');
 $routes->post('/nueva-tarjeta', 'TarjetaJoven::guardar_tarjeta');

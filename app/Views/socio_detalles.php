@@ -24,10 +24,6 @@
                     <div class="col-md-4 col-5"><strong>Teléfono:</strong></div>
                     <div class="col-md-8 col-7"><?=$socio['telefono'];?></div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4 col-5"><strong>Carta convenio:</strong></div>
-                    <div class="col-md-8 col-7"><a href="#">Por aplicar</a></div>
-                </div>
             </div>
             <div class="border bg-light p-3 col-md-8 col-12">
                 <div class="row justify-content-between pb-3">

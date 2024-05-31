@@ -23,26 +23,13 @@
                         </p>
                         <div class="btn-group-vertical d-flex align-items-center justify-content-center">
                             <a href="<?= base_url('/nueva-tarjeta');?>" class="btn btn-success">Quiero inscribirme al beneficio</a>
-                            <a href="#listaSocios" class="btn btn-info">Listado de socios</a>
+                            <a href="<?= base_url('/vitrina');?>" class="btn btn-info">Listado de socios</a>
                             <a href="#" class="btn btn-danger">Recuperación de tarjeta joven</a>
                             <a href="<?= base_url('/nuevo-socio');?>" class="btn btn-warning">Quiero ser socio</a>
                         </div>
                     </div>
                 </div>
 
-            </div>
-        </div>
-        <div class="container" id="listaSocios">
-            <div class="row">
-                <div class="mb-2"><h2>Nuestros socios</h2> </div>
-                <ul class="list-group list-group-flush">
-                    <?php foreach($listaSocios as $socio): ?>
-                        <li class="list-group-item">
-                            <div class="fw-bold lead"><?= $socio->empresa;?> - <?=$socio->direccion;?></div>
-                            <p class="lead"><?= $socio->descripcion;?></p>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
             </div>
         </div>
     </section>

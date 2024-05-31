@@ -7,6 +7,7 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
     <div class="container pt-2 flex-grow-1">
+        <h3 class="mb-2 mt-2">Listado de Colaboradores</h3>
         <div class="table-responsive">
             <table id="tablaColaboradores" class="table table-bordered">
             </table>

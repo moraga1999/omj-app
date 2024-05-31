@@ -12,10 +12,10 @@
                 <h5 class="card-title">Mi tarjeta</h5>
                 <p class="card-text">Utilizala para validar tu beneficio en los emprendimientos adheridos!</p>
                 <img src="<?= $qrcode ?>" class="img-fluid" alt="Código QR">
-                <a href="#" class="btn btn-primary">Ver listado de beneficios</a>
+                <a href="<?= base_url('/vitrina')?>" class="btn btn-primary">Ver listado de beneficios</a>
             </div>
             <div class="card-footer text-muted">
-                2 days ago
+                Válido por: <?= date("d/m/Y")?>
             </div>
         </div>
     </div>

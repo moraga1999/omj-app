@@ -39,7 +39,7 @@
                     <a class="nav-link" href="<?=base_url('/socios');?>">Colaboradores</a>
                   </li>
                   <li class="nav-item ms-auto">
-                    <a class="nav-link" href="<?=base_url('/reportes');?>">Reportes</a>
+                    <a class="nav-link" href="<?=base_url('/reportes');?>">Ventas</a>
                   </li>
                 <?php elseif($usuario['tipo'] == 2): ?>
                   <li class="nav-item ms-auto">
@@ -54,6 +54,9 @@
                   <?php elseif($usuario['tipo'] == 3): ?>
                   <li class="nav-item ms-auto">
                     <a class="nav-link" href="<?=base_url('/mi-tarjeta');?>">Mi tarjeta</a>
+                  </li>
+                  <li class="nav-item ms-auto">
+                    <a class="nav-link" href="<?=base_url('/vitrina');?>">Ver beneficios</a>
                   </li>
                 <?php endif; ?>
                 <li class="nav-item ms-auto ps-4">

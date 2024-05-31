@@ -6,6 +6,7 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
     <div class="container pt-2 flex-grow-1">
+        <h3 class="mb-2 mt-2">Mis Ventas</h3>
         <div class="row mt-2">
             <div class="col-md-6 col-lg-6 col-xl-5">
                 <div class="card mt-2">
