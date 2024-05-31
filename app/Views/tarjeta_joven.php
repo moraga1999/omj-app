@@ -25,7 +25,7 @@
                 <div class="modal-body">
 		            <?= csrf_field() ?>
                     <input type="hidden" name="id" id="modalId">
-                    <input type="hidden" name="tipo" value="convenio">
+                    <input type="hidden" name="tipo" value="compromiso">
                     <label for="archivo">Archivo</label>
                     <input type="file" class="form-control-file" name="archivo" accept=".jpg, .jpeg, .png, image/jpeg, image/png" id="archivo" required>
                 </div>
