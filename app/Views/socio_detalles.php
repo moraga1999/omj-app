@@ -7,7 +7,13 @@
     <div class="col-10 flex-grow-1 mt-4" style="margin: auto;">
         <div class="row">
             <div class="border bg-light p-3 col-md-4 col-12">
-                <legend><?=$socio['empresa'];?></legend>
+                <div class="row">
+                    <div class="col-8"><legend><?=$socio['empresa'];?></legend></div>
+                    <div class="col-4 text-end">
+                        <a href="<?=base_url("/editar-socio/".$socio['id']);?>" class="btn btn-secondary">Editar</a>
+                    </div>
+                </div>
+                
                 <div class="row">
                     <div class="col-md-4 col-5"><strong>Nombre:</strong></div>
                     <div class="col-md-8 col-7"><?=$socio['nombre'];?></div>
@@ -122,10 +128,9 @@
                                 </div>
                                 <div class="modal-body text-start">
                                     <?= csrf_field() ?>
-                                    <label for="confirmacion">Si desea eliminar el beneficio, escriba "ELIMINAR" en el campo de texto (ADVERTENCIA: Si elimina todos los beneficios, el colaborador cambiará su estado a "INACTIVO").</label>
+                                    <label for="confirmacion">Si desea eliminar el beneficio, escriba "ELIMINAR" en el campo de texto (ADVERTENCIA: Si elimina todos los beneficios, el colaborador no se mostrará en el listado).</label>
                                     <input type="text" class="form-control mt-2" name="confirmacion" required>
                                     <input type="hidden" name="id" value="<?=$beneficio->id?>">
-                                    <input type="hidden" name="nBeneficios" value="<?=count($beneficios);?>">
                                 </div>
                                 <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -140,7 +145,6 @@
             </div>
         </div>
     </div>
-    
     <?= $footer;?>
 </body>
 </html>

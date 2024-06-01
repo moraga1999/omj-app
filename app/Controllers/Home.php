@@ -23,7 +23,7 @@ class Home extends BaseController
         $usuarioData = $session->get('usuario');
         $model = new TarjetaModel();
         $joven = $model->getRegistroEmail($usuarioData['email']);
-        $header = view('header');
+        $header = view('header', ['activeLink' => 'mi-tarjeta']);
         $footer = view('footer');
         $fechaHoy = date("Y-m-d");
         $data   =  $joven['id'].",".$fechaHoy;
@@ -40,7 +40,7 @@ class Home extends BaseController
         $model = new BeneficioModel();
         $beneficios = $model->getBeneficios(strval($socio['id']));
 
-        $header = view('header');
+        $header = view('header', ['activeLink' => 'mis-beneficios']);
         $footer = view('footer');
         return view('mis_beneficios', [
             'header' => $header,

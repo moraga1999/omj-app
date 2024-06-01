@@ -15,7 +15,7 @@ class SocioTarjeta extends BaseController
         helper('form');
         $session = session();
         $usuarioData = $session->get('usuario');
-        $header = view('header');
+        $header = view('header', ['activeLink' => 'socios']);
         $footer = view('footer');
         if ($usuarioData) {
             $model = new SocioModel();
@@ -51,21 +51,16 @@ class SocioTarjeta extends BaseController
         $direccion = $this->request->getPost('direccion');
         $telefono = $this->request->getPost('telefono');
         $correo = $this->request->getPost('correo');
-        
-        $categoria = $this->request->getPost('categoria');
-        $beneficio = $this->request->getPost('beneficio');
 
         $model = new SocioModel();
-        $nuevoSocioId = $model->crearSocio($nombre, $empresa, $direccion, $telefono, $correo);
-        $model = new BeneficioModel();
-        $model->crearBeneficio($categoria, $beneficio, $nuevoSocioId);
+        $model->crearSocio($nombre, $empresa, $direccion, $telefono, $correo);
 
         $correoFormat = strstr($correo.'', '@', true);
         $userModel = new AuthModel();
         $userModel->crearUsuarioSocio($correo, $correoFormat);
         
         // Mensaje de éxito que se mostrará en la próxima solicitud
-        $session->setFlashdata('mensaje', '¡El socio ha sido registrado! te enviaremos un correo a '.$correo.' con más información.');
+        $session->setFlashdata('mensaje', '¡El colaborador ha sido registrado!');
         return redirect()->to(base_url('/tarjeta-info'));
     }
 
@@ -147,17 +142,19 @@ class SocioTarjeta extends BaseController
     public function eliminar_beneficio()
     {
         helper('form');
+        $session = session();
+        $usuarioData = $session->get('usuario');
         $id = $this->request->getPost('id');
         $confirmacion = $this->request->getPost('confirmacion');
-        $nBeneficios = $this->request->getPost('nBeneficios');
         if ($confirmacion == 'ELIMINAR') {
             $model = new BeneficioModel();
             $model->eliminarBeneficio($id);
             $model = new SocioModel();
-            if ($nBeneficios == 1) {
-                $model->cambiarEstadoSocio($id, 0);
+            if ($usuarioData["tipo"] == 1) {
+                return redirect()->to(base_url('/detalles-socio/'.$usuarioData["id"]));
+            } else {
+                return redirect()->to(base_url('/mis-beneficios'));
             }
-            return redirect()->to(base_url('/mis-beneficios'));
         }
     }
 
@@ -183,7 +180,7 @@ class SocioTarjeta extends BaseController
         $socio = $model->getRegistroEmail($usuarioData['email']);
         $model = new BeneficioModel();
         $beneficios = $model->getBeneficios(strval($socio['id']));
-        $header = view('header');
+        $header = view('header', ['activeLink' => 'validar-qr']);
         $footer = view('footer');
         return view('socio_validar', [
             'header' => $header,
@@ -213,7 +210,7 @@ class SocioTarjeta extends BaseController
         $session = session();
         $model = new ValidacionModel();
         $validaciones = $model->getValidaciones();
-        $header = view('header');
+        $header = view('header', ['activeLink' => 'reportes']);
         $footer = view('footer');
         return view('validaciones_panel', [
             'header' => $header,
@@ -229,7 +226,7 @@ class SocioTarjeta extends BaseController
         
         $model = new ValidacionModel();
         $validaciones = $model->getValidacionesSocio($usuarioData['email']);
-        $header = view('header');
+        $header = view('header', ['activeLink' => 'mis-ventas']);
         $footer = view('footer');
         return view('mis_ventas', [
             'header' => $header,

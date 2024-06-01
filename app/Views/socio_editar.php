@@ -42,48 +42,6 @@
                               <button type="submit" class="btn btn-primary">Guardar cambios</button>
                             </div>
                         </form>
-                        <fieldset class="m-2"> <legend>Beneficio asociado</legend>
-							<div class="row">
-						        <div class="col-md-2 col-4 border" style="background-color: whitesmoke;">
-						          Categoría
-						        </div>
-						        <div class="col-md-3 col-8 border">
-					            <?= $beneficio['categoria']?>
-						        </div>
-						        <div class="col-md-2 col-4 border" style="background-color: whitesmoke;">
-					            Descripción
-						        </div>
-						        <div class="col-md-5 col-8 border">
-					          	<?= $beneficio['descripcion']?>
-						        </div>
-						    </div>
-						</fieldset>
-                        
-                        <div class="text-end">
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalBeneficio<?=$socio['id'] ?>">Eliminar Beneficio</button>
-                            <form method="post" action="<?=base_url('/eliminar-beneficio') ?>" autocomplete="off">
-                                <div class="modal fade" id="modalBeneficio<?=$socio['id'] ?>" tabindex="-1" aria-labelledby="modalBeneficioLabel<?=$socio['id'] ?>" aria-hidden="true">
-                                  <div class="modal-dialog">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h5 class="modal-title" id="modalBeneficioLabel<?$socio['id'] ?>">Eliminar beneficio socio <?=$socio['id']?></h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                      </div>
-                                      <div class="modal-body text-start">
-                                            <?= csrf_field() ?>
-                                            <label for="confirmacion">Si desea eliminar el beneficio, escriba "ELIMINAR" en el campo de texto (ADVERTENCIA: Si elimina el beneficio asociado, el socio deberá ser evaluado con una nueva propuesta de beneficio).</label>
-                                            <input type="text" class="form-control mt-2" name="confirmacion" required>
-                                            <input type="hidden" name="id" value="<?=$socio['id'] ?>">
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-danger">Eliminar Beneficio</button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                            </form>
-                        </div>
                     </div>
                 </div>
             </div>

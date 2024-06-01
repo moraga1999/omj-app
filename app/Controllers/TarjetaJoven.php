@@ -14,7 +14,7 @@ class TarjetaJoven extends BaseController
         helper('form');
         $session = session();
         $usuarioData = $session->get('usuario');
-        $header = view('header');
+        $header = view('header', ['activeLink' => 'panel']);
         $footer = view('footer');
         if ($usuarioData) {
             $model = new TarjetaModel();
@@ -161,7 +161,7 @@ class TarjetaJoven extends BaseController
         $session = session();
         $model = new SocioModel();
         $listaSocios = $model->getSociosBeneficios();
-        $header = view('header');
+        $header = view('header', ['activeLink' => 'vitrina']);
         $footer = view('footer');
         return view('beneficios_vitrina', [
             'header' => $header,

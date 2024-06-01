@@ -46,24 +46,6 @@
                                     <input type="email" class="form-control" id="correo" name="correo" placeholder="Ej: jnitocst@correo.com" required>
                                 </div>
                             </div>
-                            <div class="lead">Propuesta de beneficio</div>
-                            <div class="row">
-                                <div class="form-group mb-2 col-md-4 col-12">
-                                    <label for="categoria">Categoría</label>
-                                    <select type="text" class="form-select" id="categoria" id="categoria" name="categoria" required>
-                                        <option value="" selected disabled> Elegir una opción</option>
-                                        <option value="Salud">Salud</option>
-                                        <option value="Ropa">Ropa</option>
-                                        <option value="Entrenimiento">Entrenimiento</option>
-                                        <option value="Educación">Educación</option>
-                                        <option value="Alimentación">Alimentación</option>
-                                    </select>
-                                </div>
-                                <div class="form-group mb-2 col-md-8 col-12">
-                                    <label for="beneficio">Descripción</label>
-                                    <input type="text" class="form-control" name="beneficio" id="beneficio" placeholder="Ej: 15% descuento en juguetes" required>
-                                </div>
-                            </div>
                             <div class="text-end">
                               <a href="javascript:history.back()" class="btn btn-secondary">Cancelar</a>
                               <button type="submit" class="btn btn-primary">Inscribirse</button>

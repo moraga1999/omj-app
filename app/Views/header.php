@@ -33,30 +33,30 @@
                 $usuario = $_SESSION['usuario'];
                 if($usuario['tipo'] == 1):?>
                   <li class="nav-item ms-auto">
-                    <a class="nav-link" href="<?=base_url('/panel');?>">Tarjeta joven</a>
+                    <a class="nav-link <?= isset($activeLink) && $activeLink == 'panel' ? 'active text-white' : '' ?>" href="<?=base_url('/panel');?>">Tarjeta joven</a>
                   </li>
                   <li class="nav-item ms-auto">
-                    <a class="nav-link" href="<?=base_url('/socios');?>">Colaboradores</a>
+                    <a class="nav-link <?= isset($activeLink) && $activeLink == 'socios' ? 'active text-white' : '' ?>" href="<?=base_url('/socios');?>">Colaboradores</a>
                   </li>
                   <li class="nav-item ms-auto">
-                    <a class="nav-link" href="<?=base_url('/reportes');?>">Ventas</a>
+                    <a class="nav-link <?= isset($activeLink) && $activeLink == 'reportes' ? 'active text-white' : '' ?>" href="<?=base_url('/reportes');?>">Ventas</a>
                   </li>
                 <?php elseif($usuario['tipo'] == 2): ?>
                   <li class="nav-item ms-auto">
-                    <a class="nav-link" href="<?=base_url('/mis-beneficios');?>">Mis Beneficios</a>
+                    <a class="nav-link <?= isset($activeLink) && $activeLink == 'mis-beneficios' ? 'active text-white' : '' ?>" href="<?=base_url('/mis-beneficios');?>">Mis Beneficios</a>
                   </li>
                   <li class="nav-item ms-auto">
-                    <a class="nav-link" href="<?=base_url('/validar-qr');?>">Validar Tarjeta</a>
+                    <a class="nav-link <?= isset($activeLink) && $activeLink == 'validar-qr' ? 'active text-white' : '' ?>" href="<?=base_url('/validar-qr');?>">Validar Tarjeta</a>
                   </li>
                   <li class="nav-item ms-auto">
-                    <a class="nav-link" href="<?=base_url('/mis-ventas');?>">Mis Ventas</a>
+                    <a class="nav-link <?= isset($activeLink) && $activeLink == 'mis-ventas' ? 'active text-white' : '' ?>" href="<?=base_url('/mis-ventas');?>">Mis Ventas</a>
                   </li>
                   <?php elseif($usuario['tipo'] == 3): ?>
                   <li class="nav-item ms-auto">
-                    <a class="nav-link" href="<?=base_url('/mi-tarjeta');?>">Mi tarjeta</a>
+                    <a class="nav-link <?= isset($activeLink) && $activeLink == 'mi-tarjeta' ? 'active text-white' : '' ?>" href="<?=base_url('/mi-tarjeta');?>">Mi tarjeta</a>
                   </li>
                   <li class="nav-item ms-auto">
-                    <a class="nav-link" href="<?=base_url('/vitrina');?>">Ver beneficios</a>
+                    <a class="nav-link <?= isset($activeLink) && $activeLink == 'vitrina' ? 'active text-white' : '' ?>" href="<?=base_url('/vitrina');?>">Ver beneficios</a>
                   </li>
                 <?php endif; ?>
                 <li class="nav-item ms-auto ps-4">
