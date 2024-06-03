@@ -11,14 +11,6 @@
             <div class="col-md-6 col-lg-6 col-xl-5">
                 <div class="card mt-2">
                     <div class="card-body">
-                        <h5 class="card-title">Montos a lo Largo del Tiempo</h5>
-                        <canvas id="lineChart"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-6 col-xl-5">
-                <div class="card mt-2">
-                    <div class="card-body">
                         <h5 class="card-title">Montos por Día</h5>
                         <canvas id="barChart"></canvas>
                     </div>
@@ -40,11 +32,23 @@
     <script>
         // Supongamos que $validaciones es un array de objetos PHP
         var validaciones = <?=$validaciones?>;
-
         // Función para convertir los montos a números
         function convertMontos(data) {
             return data.map(item => parseFloat(item.monto));
         }
+
+        // Objeto para almacenar los montos agrupados por fecha
+        var groupedData = {};
+
+        // Procesar los datos recibidos
+        validaciones.forEach(function(item) {
+            var date = formatDate(item.fecha_creacion); // Fecha en formato Y-m-d
+            if (!groupedData[date]) {
+                groupedData[date] = 0;
+            }
+            // Sumar el monto de la transacción al monto correspondiente a esa fecha
+            groupedData[date] += parseInt(item.monto);
+        });
 
         // Función para formatear las fechas
         function formatDate(dateString) {
@@ -53,33 +57,9 @@
         }
 
         // Extraer datos
-        var labels = validaciones.map(item => formatDate(item.fecha_creacion));
-        var montos = convertMontos(validaciones);
+        var labels = Object.keys(groupedData);
+        var montos = Object.values(groupedData);
         var beneficios = validaciones.map(item => item.beneficio);
-        var socios = validaciones.map(item => item.email_socio);
-
-        // Gráfico de Línea - Montos a lo Largo del Tiempo
-        var ctxLine = document.getElementById('lineChart').getContext('2d');
-        var lineChart = new Chart(ctxLine, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Monto',
-                    data: montos,
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
 
         // Gráfico de Barras - Montos por Día
         var ctxBar = document.getElementById('barChart').getContext('2d');
@@ -116,7 +96,7 @@
             data: {
                 labels: uniqueBeneficios,
                 datasets: [{
-                    label: 'Beneficios',
+                    label: 'Utilizado',
                     data: beneficiosCount,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
