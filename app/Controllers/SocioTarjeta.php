@@ -46,22 +46,45 @@ class SocioTarjeta extends BaseController
     {
         helper('form');
         $session = session();
-        $nombre = $this->request->getPost('nombre');
-        $empresa = $this->request->getPost('empresa');
-        $direccion = $this->request->getPost('direccion');
-        $telefono = $this->request->getPost('telefono');
-        $correo = $this->request->getPost('correo');
+        $recaptchaResponse = $this->request->getPost('g-recaptcha-response');
+        $secretKey = env('reCAPTCHA_SECRET');
+        $credential = [
+            'secret' => $secretKey,
+            'response' => $recaptchaResponse
+        ];
+        $verify = curl_init();
+        curl_setopt($verify, CURLOPT_URL, "https://www.google.com/recaptcha/api/siteverify");
+        curl_setopt($verify, CURLOPT_POST, true);
+        curl_setopt($verify, CURLOPT_POSTFIELDS, http_build_query($credential));
+        curl_setopt($verify, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($verify, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($verify);
+        curl_close($verify);
 
-        $model = new SocioModel();
-        $model->crearSocio($nombre, $empresa, $direccion, $telefono, $correo);
+        $status = json_decode($response, true);
 
-        $correoFormat = strstr($correo.'', '@', true);
-        $userModel = new AuthModel();
-        $userModel->crearUsuarioSocio($correo, $correoFormat);
+        if ($status['success']) {
+            $nombre = $this->request->getPost('nombre');
+            $empresa = $this->request->getPost('empresa');
+            $direccion = $this->request->getPost('direccion');
+            $telefono = $this->request->getPost('telefono');
+            $correo = $this->request->getPost('correo');
+
+            $model = new SocioModel();
+            $model->crearSocio($nombre, $empresa, $direccion, $telefono, $correo);
+
+            $correoFormat = strstr($correo.'', '@', true);
+            $userModel = new AuthModel();
+            $userModel->crearUsuarioSocio($correo, $correoFormat);
+            
+            // Mensaje de éxito que se mostrará en la próxima solicitud
+            $session->setFlashdata('mensaje', '¡El colaborador ha sido registrado!');
+            return redirect()->to(base_url('/tarjeta-info'));
+        } else {
+            // Manejo de error, reCAPTCHA no es válido
+            return redirect()->back()->with('error', 'Verificación de reCAPTCHA fallida, por favor intenta de nuevo.');
+        }
         
-        // Mensaje de éxito que se mostrará en la próxima solicitud
-        $session->setFlashdata('mensaje', '¡El colaborador ha sido registrado!');
-        return redirect()->to(base_url('/tarjeta-info'));
     }
 
     public function evaluar_socio(): RedirectResponse

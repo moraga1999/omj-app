@@ -57,18 +57,40 @@ class TarjetaJoven extends BaseController
     public function guardar_tarjeta(): RedirectResponse
     {
         helper('form');
-        $nombre = $this->request->getPost('nombre');
-        $rut = $this->request->getPost('rut');
-        $rut = str_replace(['.', '-'], '', $rut);
-        $direccion = $this->request->getPost('direccion');
-        $nacimiento = $this->request->getPost('nacimiento');
-        $telefono = $this->request->getPost('telefono');
-        $correo = $this->request->getPost('correo');
-        $model = new TarjetaModel();
-        $model->crearRegistro($nombre, $rut, $direccion, $nacimiento, $telefono, $correo);
-        $userModel = new AuthModel();
-        $userModel->crearUsuarioJoven($correo, $rut);
-        return redirect()->to(base_url('/'));
+        $recaptchaResponse = $this->request->getPost('g-recaptcha-response');
+        $secretKey = env('reCAPTCHA_SECRET');
+        $credential = [
+            'secret' => $secretKey,
+            'response' => $recaptchaResponse
+        ];
+        $verify = curl_init();
+        curl_setopt($verify, CURLOPT_URL, "https://www.google.com/recaptcha/api/siteverify");
+        curl_setopt($verify, CURLOPT_POST, true);
+        curl_setopt($verify, CURLOPT_POSTFIELDS, http_build_query($credential));
+        curl_setopt($verify, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($verify, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($verify);
+        curl_close($verify);
+
+        $status = json_decode($response, true);
+
+        if ($status['success']) {
+            $nombre = $this->request->getPost('nombre');
+            $rut = $this->request->getPost('rut');
+            $rut = str_replace(['.', '-'], '', $rut);
+            $direccion = $this->request->getPost('direccion');
+            $nacimiento = $this->request->getPost('nacimiento');
+            $telefono = $this->request->getPost('telefono');
+            $correo = $this->request->getPost('correo');
+            $model = new TarjetaModel();
+            $model->crearRegistro($nombre, $rut, $direccion, $nacimiento, $telefono, $correo);
+            $userModel = new AuthModel();
+            $userModel->crearUsuarioJoven($correo, $rut);
+            return redirect()->to(base_url('/'))->with('message', 'Formulario enviado correctamente');
+        } else {
+            // Manejo de error, reCAPTCHA no es válido
+            return redirect()->back()->with('error', 'Verificación de reCAPTCHA fallida, por favor intenta de nuevo.');
+        }
     }
 
     public function guardar_qr(): RedirectResponse

@@ -2,6 +2,7 @@
 <html>
 <head>
 	<?= $header ?>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body class="d-flex flex-column min-vh-100">
 	<div class="container flex-grow-1">
@@ -45,6 +46,7 @@
                                     <label for="correo">Correo electrónico</label>
                                     <input type="email" class="form-control" id="correo" name="correo" placeholder="Ej: jnitocst@correo.com" required>
                                 </div>
+                                <div class="g-recaptcha" data-sitekey="6LfsU-8pAAAAADmmZz84XUVImvSoQNV6U5NUwlij"></div>
                             </div>
                             <div class="text-end">
                               <a href="javascript:history.back()" class="btn btn-secondary">Cancelar</a>

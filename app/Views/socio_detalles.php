@@ -89,7 +89,7 @@
                                                 <option value="" selected disabled> Elegir una opción</option>
                                                 <option value="Salud">Salud</option>
                                                 <option value="Ropa">Ropa</option>
-                                                <option value="Entrenimiento">Entrenimiento</option>
+                                                <option value="Entretenimiento">Entretenimiento</option>
                                                 <option value="Educación">Educación</option>
                                                 <option value="Alimentación">Alimentación</option>
                                             </select>

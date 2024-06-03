@@ -2,9 +2,15 @@
 <html>
 <head>
 	<?= $header ?>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body class="d-flex flex-column min-vh-100">
 	<div class="container flex-grow-1">
+        <?php if(session()->has('error')): ?>
+            <div class="alert alert-danger">
+                <?= session('error') ?>
+            </div>
+        <?php endif; ?>
         <div class="row justify-content-center ">
             <div class="col-sm-10 col-md-8">
                 <div class="card" style="margin: 2% auto">
@@ -46,6 +52,7 @@
                                 <label for="correo">Correo electrónico</label>
                                 <input type="email" class="form-control" id="correo" name="correo" placeholder="Ej: jnitocst@correo.com" required>
                             </div>
+                            <div class="g-recaptcha" data-sitekey="6LfsU-8pAAAAADmmZz84XUVImvSoQNV6U5NUwlij"></div>
                             <div class="text-end">
                               <a href="javascript:history.back()" class="btn btn-secondary">Cancelar</a>
                               <button type="submit" class="btn btn-primary">Inscribirse</button>
